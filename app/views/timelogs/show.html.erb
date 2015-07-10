@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Person:</strong>
+  <%= link_to @timelog.person.name, @timelog.person %>
+</p>
+
+<p>
+  <strong>Time in:</strong>
+  <%= local_time @timelog.time_in %>
+</p>
+
+<p>
+  <strong>Time out:</strong>
+  <%= local_time @timelog.time_out %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= Time.at(@timelog.duration).utc.strftime("%H:%M:%S") %>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_timelog_path(@timelog), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

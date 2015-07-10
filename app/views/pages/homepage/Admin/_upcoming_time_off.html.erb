@@ -1,0 +1,17 @@
+<%color = "orange"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Upcoming Hour Exceptions</h5>
+</div>
+<ul>
+	<%exceptions = current_user.hour_exceptions.order(:time_beginning).limit(5)%>
+	<%if exceptions.size ==0%>
+		<i>You have no upcoming hour exceptions.</i>
+	<%else%>
+		<%exceptions.each do |ex|%>
+			<li>
+				<%=local_time ex.time_beginning, "%m/%d   %I:%M %p" rescue "Unknown"%> - <%=local_time ex.time_ending, "%I:%M %p" rescue "Unknown"%>
+			</li>
+		<%end%>
+	<%end%>
+</ul>
+<%=link_to fa_icon("plus")+" New Exception", new_hour_exception_path, :class=>"btn #{color} fixed_bottom"%>

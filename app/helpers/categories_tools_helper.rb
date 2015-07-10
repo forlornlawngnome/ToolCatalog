@@ -1,0 +1,2 @@
+module CategoriesToolsHelper
+end

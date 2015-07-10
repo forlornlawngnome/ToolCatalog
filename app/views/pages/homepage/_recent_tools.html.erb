@@ -1,0 +1,15 @@
+<%color = "green"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Recently Used Tools</h5>
+</div>
+<dl>
+	<%if current_user.tool_logs.empty?%>
+		<i>You have never checked out a tool.</i>
+	<%else%>
+		<ul>
+			<%current_user.checked_out_tools.limit(10).uniq.each do |tool|%>
+				<li><%=link_to tool.name, tool%></li>
+			<%end%>
+		</ul>
+	<%end%>
+</dl>

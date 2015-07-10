@@ -1,0 +1,17 @@
+<%color = "orange"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Tools Checked Out</h5>
+</div>
+<ul>
+	<%tools_out = ToolLog.joins(:tool).checked_out.order("tools.name").limit(5)%>
+	<%if tools_out.size ==0%>
+		<i>All tools are checked in.</i>
+	<%else%>
+		<%tools_out.each do |tool_log|%>
+			<li>
+				<%=link_to tool_log.tool.name, tool_log.tool%> - <%=link_to tool_log.person.name, tool_log.person%>
+			</li>
+		<%end%>
+	<%end%>
+</ul>
+<%=link_to "All Tools Out", admin_tools_out_path, :class=>"btn #{color} fixed_bottom"%>

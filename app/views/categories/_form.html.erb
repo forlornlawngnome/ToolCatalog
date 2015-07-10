@@ -1,0 +1,53 @@
+<%=simple_form_for(@category, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Category Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				<div>
+				  	<!-- Nav tabs -->
+					<div class="col-md-3">
+						<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
+							<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">General Info</a></li>
+							<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Tools</a></li>
+							<li role="presentation"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">Course</a></li>
+					  	</ul>
+				  	</div>
+				  	<!-- Tab panes -->
+				  	<div class="col-md-9">
+					  	<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="about">
+								<%=f.input :name%>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="tools">
+								<%= f.association :tools,   as: :check_boxes %>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="courses">
+								<%= f.association :courses,   as: :check_boxes %>
+							</div>
+					  	</div>
+					</div>
+
+				</div>
+				
+				
+				
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

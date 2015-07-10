@@ -1,0 +1,15 @@
+<%color = "purple"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Upcoming Hours</h5>
+</div>
+<dl>
+	<%@hours.each do |day_of_week|%>
+		<dt><%=Date::DAYNAMES[day_of_week[0]]%></dt>
+		<%day_of_week[1].each do |hour|%>
+			<%real_hours = hour.actual_hours%>
+			<%real_hours[:times].each do |time|%>
+				<dd><%=hour.person.name%>: <%=local_time time[1][:open], "%I:%M %p" rescue "Unknown"%> - <%=local_time time[1][:close], "%I:%M %p" rescue "Unknown"%></dd>
+			<%end%>
+		<%end%>
+	<%end%>
+</dl>

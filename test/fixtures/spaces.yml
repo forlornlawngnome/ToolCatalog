@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  max_people: 1
+  reservable: false
+  max_reservable_time: 1
+
+two:
+  name: MyString
+  max_people: 1
+  reservable: false
+  max_reservable_time: 1

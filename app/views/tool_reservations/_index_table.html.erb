@@ -1,0 +1,25 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Tool</th>
+      <th>Reservation beginning</th>
+      <th>Reservation ending</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% tool_reservations.each do |tool_reservation| %>
+      <tr>
+        <td><%= link_to tool_reservation.person.name, tool_reservation.person %></td>
+        <td><%= link_to tool_reservation.tool.name, tool_reservation.tool %></td>
+        <td><%= local_time tool_reservation.reservation_beginning, "%a %B %d - %I:%M %p"%></td>
+        <td><%= local_time tool_reservation.reservation_ending, "%a %B %d - %I:%M:%S %p" %></td>
+        <td><%= link_to 'Show', tool_reservation %></td>
+        <td><%= link_to fa_icon("pencil"), edit_tool_reservation_path(tool_reservation) %></td>
+        <td><%= link_to fa_icon("trash-o"), tool_reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

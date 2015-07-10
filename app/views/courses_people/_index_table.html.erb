@@ -1,0 +1,29 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Course</th>
+      <th>Person</th>
+      <th>Date requested</th>
+      <th>Approver</th>
+      <th>Approved</th>
+      <th>Approval date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% courses_people.each do |courses_person| %>
+      <tr>
+        <td><%= link_to courses_person.course.name, courses_person.course %></td>
+        <td><%= link_to courses_person.person.name, courses_person.person %></td>
+        <td><%= local_time courses_person.date_requested, "%B %d, %Y" rescue ""%></td>
+        <td><%= courses_person.approver %></td>
+        <td><%= courses_person.approved %></td>
+        <td><%= local_time courses_person.approval_date, "%B %d, %Y" rescue ""%></td>
+        <td><%= link_to 'Show', courses_person %></td>
+        <td><%= link_to fa_icon("pencil"), edit_courses_person_path(courses_person) %></td>
+        <td><%= link_to fa_icon("trash-o"), courses_person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

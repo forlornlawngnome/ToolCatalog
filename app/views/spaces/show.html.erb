@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @space.name %>
+</p>
+
+<p>
+  <strong>Max people:</strong>
+  <%= @space.max_people %>
+</p>
+
+<p>
+  <strong>Reservable:</strong>
+  <%= @space.reservable %>
+</p>
+
+<p>
+  <strong>Max reservable time:</strong>
+  <%= @space.max_reservable_time %>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_space_path(@space), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

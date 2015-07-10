@@ -1,0 +1,16 @@
+<p>
+  <strong>Person:</strong>
+  <%= link_to @forms_person.person.name, @forms_person.person %>
+</p>
+
+<p>
+  <strong>Form:</strong>
+  <%= link_to @forms_person.form.name, @forms_person.form %>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_forms_person_path(@forms_person), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

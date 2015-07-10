@@ -1,0 +1,51 @@
+<%=simple_form_for(@space_reservation, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Space Reservation Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				
+				<%if current_user.is_admin%>
+					<%=f.input :person_id, :collection=> Person.order("lower(name)"), :include_blank=> true, :selected=> (f.object.new_record? ? current_user.id : f.object.person_id)%>
+				<%else%>
+					<div class="form-group">
+						<%= f.label :person_id, :class=>"col-sm-3 control-label"%>
+						<div class="col-sm-9">
+							<p class="form-control-static"><%=current_user.name%></p>
+							<%=f.input :person_id, :as=>:hidden, :input_html =>{:value=>current_user.id}%>
+						</div>
+					</div>
+				<%end%>
+				
+				<%=f.input :space_id, :collection=> Space.reservable.order("lower(spaces.name)").uniq%>
+				<%=f.input :reservation_beginning, :as=>:string%>
+				<%=f.input :reservation_ending, :as=>:string, :label=> "Ending Time"%>
+				<%=f.input :number_of_people%>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+<script>
+$('#space_reservation_reservation_beginning').datetimepicker({
+    dateFormat: 'yy-mm-dd',
+	timeFormat: 'hh:mm TT'});
+$('#space_reservation_reservation_ending').datetimepicker({
+	datepicker:false,
+	timeFormat: 'hh:mm TT',
+	timeOnly: true});
+</script>

@@ -1,0 +1,39 @@
+<%=simple_form_for(@tool_log, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Tool Log Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				<%=f.input :tool_id, collection: Tool.order("lower(name)"), input_html: {:include_blank => true}%>
+				<%=f.input :person_id, collection: Person.order("lower(name)"), input_html: {:include_blank => true}%>
+				<%=f.input :time_in, as: :string %>
+				<%=f.input :time_out, as: :string %>
+				<%=f.input :tool_reservation_id, collection: ToolReservation.includes(:tool_log).where(:tool_logs=>{:tool_reservation_id=>nil}), input_html: {:include_blank => true}%>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+<script>
+$('#tool_log_time_in').datetimepicker({
+    dateFormat: 'yy-mm-dd',
+	timeFormat: 'hh:mm TT'});
+$('#tool_log_time_out').datetimepicker({
+    dateFormat: 'yy-mm-dd',
+	timeFormat: 'hh:mm TT'});
+</script>

@@ -1,0 +1,2 @@
+module SpaceReservationsHelper
+end

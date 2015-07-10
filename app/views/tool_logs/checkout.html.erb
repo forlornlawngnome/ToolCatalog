@@ -1,0 +1,55 @@
+<h1>New Tool Log</h1>
+<%= form_for @tool_log do |f| %>
+  <% if @tool_log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tool_log.errors.count, "error") %> prohibited this timelog from being saved:</h2>
+
+      <ul>
+      <% @tool_log.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%="User Number" %><br />
+    <%= text_field_tag :person_id%>
+	<%= javascript_tag "$('#person_id').focus()" %>
+  </div>
+  <div class="field">
+    <%="Tool Number" %><br />
+    <%= text_field_tag :tool_id%>
+	<%= javascript_tag "$('#tool_id').focus()" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", :name => 'multi' %>
+  </div>
+<hr />
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Tool Name</th>
+			<th>Person</th>
+			<th>In/Out</th>
+			<th>Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%@logs.each do |log|%>
+			<tr>
+				<td><%=link_to log.tool.name, log.tool%></td>
+				<td><%=link_to log.person.name, log.person%></td>
+				<%if log.time_out.nil?%>
+					<td>Checked Out</td>
+					<td><%=local_time log.time_in, "%I:%M:%S %p"%></td>
+				<%else%>
+					<td>Checked In</td>
+					<td><%=local_time log.time_out, "%I:%M:%S %p"%></td>
+				<%end%>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+<%end%>

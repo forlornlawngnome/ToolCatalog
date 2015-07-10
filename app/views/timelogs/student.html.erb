@@ -1,0 +1,48 @@
+<h1>New timelog</h1>
+<%= form_for @timelog do |f| %>
+  <% if @timelog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@timelog.errors.count, "error") %> prohibited this timelog from being saved:</h2>
+
+      <ul>
+      <% @timelog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%="User Number" %><br />
+    <%= text_field_tag :person_id%>
+	<%= javascript_tag "$('#person_id').focus()" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", :name => 'multi' %>
+  </div>
+<hr />
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>In/Out</th>
+			<th>Time</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%@logs.each do |log|%>
+			<tr>
+				<td><%=log.person.name%></td>
+				<%if log.time_out.nil?%>
+					<td>In</td>
+					<td><%=local_time log.time_in, "%I:%M:%S %p"%></td>
+				<%else%>
+					<td>Out</td>
+					<td><%=local_time log.time_out, "%I:%M:%S %p"%></td>
+				<%end%>
+			</tr>
+		<%end%>
+	</tbody>
+</table>
+
+<%end%>

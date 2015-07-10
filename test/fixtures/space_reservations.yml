@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  person_id: 
+  space_id: 
+  reservation_beginning: 2015-06-16
+  reservation_ending: 2015-06-16
+  number_of_people: 1
+
+two:
+  person_id: 
+  space_id: 
+  reservation_beginning: 2015-06-16
+  reservation_ending: 2015-06-16
+  number_of_people: 1

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time_open: 2015-06-16 20:55:21
+  time_close: 2015-06-16 20:55:21
+  person_id: 
+  day_of_week: 1
+
+two:
+  time_open: 2015-06-16 20:55:21
+  time_close: 2015-06-16 20:55:21
+  person_id: 
+  day_of_week: 1

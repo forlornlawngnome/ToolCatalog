@@ -1,0 +1,136 @@
+<div class="row">
+	<div class="col-md-10">
+		<h2 class="nopadding">
+			<%=@person.name.titleize%>
+		</h2>
+	</div>
+	<div class="col-md-2 pull-right">
+		<%if current_user.is_admin%>
+			<%=link_to fa_icon("pencil"), edit_person_path(@person), :class=>"pull-right"%>
+		<%end%>
+	</div>
+</div>
+<hr />
+<div class="row">
+  	<!-- Nav tabs -->
+	<div class="col-md-3">
+		<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
+			<li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">General Info</a></li>
+			<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Tools</a></li>
+			<li role="presentation"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">Courses</a></li>
+			<li role="presentation"><a href="#forms" aria-controls="forms" role="tab" data-toggle="tab">Forms</a></li>
+	  	</ul>
+  	</div>
+  	<!-- Tab panes -->
+  	<div class="col-md-9">
+	  	<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="info">
+				<p>
+				  <strong>Name:</strong>
+				  <%= @person.name %>
+				</p>
+
+				<p>
+				  <strong>Email:</strong>
+				  <%= @person.email %>
+				</p>
+
+				<p>
+				  <strong>Graduation year:</strong>
+				  <%= @person.graduation_year %>
+				</p>
+				<%if current_user.is_admin%>
+					<p>
+					  <strong>Barcode:</strong>
+					  <%= @person.barcode %>
+					</p>
+
+					<p>
+					  <strong>Emergency contact name:</strong>
+					  <%= @person.emergency_contact_name %>
+					</p>
+
+					<p>
+					  <strong>Emergency contact number:</strong>
+					  <%= @person.emergency_contact_number %>
+					</p>
+
+					<p>
+					  <strong>Archived:</strong>
+					  <%= @person.archived %>
+					</p>
+
+					<p>
+					  <strong>Is admin:</strong>
+					  <%= @person.is_admin %>
+					</p>
+
+					<p>
+					  <strong>Is student admin:</strong>
+					  <%= @person.is_student_admin %>
+					</p>
+				<%end%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="tools">
+				<%@person.tools.order(:name).uniq.each do |tool|%>
+					<%=render "/tools/tool_container", :tool=>tool%>
+				<%end%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="courses">
+				<h4>Courses Taken</h4>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Course</th>
+							<th>Access Approved?</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%CoursesPerson.where(:person_id=>@person.id).joins(:course).order("courses.name").each do |course|%>
+							<tr>
+								<td>
+									<%=link_to course.course.name, course.course%>
+								</td>
+								<td>
+									<%=course.approved ? "Approved" : "Pending"%>
+								</td>
+							</tr>
+						<%end%>
+					</tbody>
+				</table>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="forms">
+				<h4>Forms</h4>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Form</th>
+							<th>Form Turned In?</th>
+						</tr>
+					</thead>
+					<tbody>
+						<%Form.order("name").each do |form|%>
+							<tr>
+								<td>
+									<%=link_to form.name, form%>
+								</td>
+								<td>
+									<%if FormsPerson.where(:person_id=>@person.id, :form_id=>form.id).size > 0%>
+										Turned In
+									<%else%>
+										Missing
+									<%end%>
+								</td>
+							</tr>
+						<%end%>
+					</tbody>
+				</table>
+			</div>
+	  	</div>
+	</div>
+
+</div>
+
+<div class="row">
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

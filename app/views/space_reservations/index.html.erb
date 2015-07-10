@@ -1,0 +1,7 @@
+<h1>Listing Space Reservations</h1>
+
+<%=render "space_reservations/index_table", :space_reservations=>@space_reservations%>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Space Reservation".html_safe, new_space_reservation_path, :class=>"btn btn-primary" %>

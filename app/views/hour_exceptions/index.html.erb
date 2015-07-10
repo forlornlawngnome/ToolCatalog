@@ -1,0 +1,7 @@
+<h1>Listing Hour Exceptions</h1>
+
+<%=render "hour_exceptions/index_table", :hour_exceptions => @hour_exceptions%>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Hour Exception".html_safe, new_hour_exception_path, :class=>"btn btn-primary" %>

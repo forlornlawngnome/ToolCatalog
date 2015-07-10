@@ -1,0 +1,15 @@
+<%color = "orange"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Available Training</h5>
+</div>
+<%if current_user.available_courses.empty?%>
+	<i>We have no new courses for you to take now.</i>
+<%else%>
+	<%current_user.available_courses.each do |course|%>
+		<li><%=link_to course.name, course%> </li>
+		
+	<%end%>
+<%end%>
+<%if current_user.is_admin%>
+	<%=link_to fa_icon("plus")+" New Course", new_course_path, :class=>"btn #{color} fixed_bottom"%>
+<%end%>

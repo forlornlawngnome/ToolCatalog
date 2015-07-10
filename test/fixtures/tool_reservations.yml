@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  person_id: 
+  tool_id: 
+  reservation_beginning: 2015-06-16
+  reservation_ending: 2015-06-16
+
+two:
+  person_id: 
+  tool_id: 
+  reservation_beginning: 2015-06-16
+  reservation_ending: 2015-06-16

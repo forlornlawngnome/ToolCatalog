@@ -1,0 +1,9 @@
+<div class="col-md-12">
+	<h3>Upcoming Hour Exceptions</h3>
+	<hr />
+	<%=link_to "All Hour Exceptions", hour_exceptions_path%> | 
+	<%= link_to 'New Hour Exception', new_hour_exception_path %>
+	<br />
+	<br />
+	<%=render "/hour_exceptions/index_table", :hour_exceptions => HourException.future%>
+</div>

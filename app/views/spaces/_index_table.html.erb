@@ -1,0 +1,24 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Max people</th>
+      <th>Reservable</th>
+      <th>Maximum reservable hours</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% spaces.each do |space| %>
+      <tr>
+        <td><%= link_to space.name, space %></td>
+        <td><%= space.max_people %></td>
+        <td><%= space.reservable %></td>
+        <td><%= space.max_reservable_time %></td>
+        <td><%= link_to fa_icon("pencil"), edit_space_path(space) %></td>
+        <td><%= link_to fa_icon("trash-o"), space, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @documentation_link.name %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= link_to @documentation_link.link, @documentation_link.link, :target=>"_blank" %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= link_to @documentation_link.course.name, @documentation_link.course %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @documentation_link.active %>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_documentation_link_path(@documentation_link), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

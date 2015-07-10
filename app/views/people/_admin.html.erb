@@ -1,0 +1,11 @@
+<div class="col-md-12">
+	<h3>People</h3>
+	<hr />
+	<%=link_to "All People", people_path%> | 
+	<%= link_to 'New Person', new_person_path %>
+	<br />
+	How to minimize this?
+	<br />
+	
+	<%=render "/people/index_table", :people => Person.active%>
+</div>

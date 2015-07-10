@@ -1,0 +1,84 @@
+<div class="row">
+	<div class="col-md-8">
+		<h2><%= @course.name %></h2>
+	</div>
+	<div class="col-md-4">
+		<%if current_user.is_admin or current_user.is_student_admin%>
+			<%= link_to fa_icon("pencil"), edit_course_path(@course), :class=>"pull-right"%>
+		<%end%>
+	</div>
+</div>
+<%if !@course.recertification.nil? && @course.recertification > 0%>
+	<i>Note: This course must be recertified every <%= @course.recertification %> days.</i>
+<%end%>
+<hr />
+<div class="row">
+	<div class="col-md-offset-1 col-md-7">
+		<div class="row">
+			<h3>About</h3>
+			<hr />
+			<p>
+			  <%= @course.additional_info.html_safe %>
+			</p>
+		</div>
+		<br />
+		<div class="row">
+			<h3>Related Links</h3>
+			<hr />
+			<%@course.documentation_links.where(:active=>true).each do |link|%>
+				<li><%=link_to link.name, link.link, :target=>"_blank"%></li>
+			<%end%>
+		</div>
+	</div>
+
+	<div class="col-md-3 pull-right">
+		<div class="row">
+			<%if current_user.courses.include?(@course)%>
+				<%course_person = CoursesPerson.where(:course_id => @course.id, :person_id => current_user.id).first%>
+				<%if course_person.approved%>
+					<div class="alert alert-success">
+						You have already completed this course!
+					</div>
+				<%else%>
+					<div class="alert alert-warning">
+						Your completion of this course is pending admin approval.
+					</div>
+				<%end%>
+			<%else%>
+					<%=simple_form_for(CoursesPerson.new) do |f|%>
+						<%= f.input :course_id, :as => :hidden, :input_html => { :value =>@course.id  }%>
+						<%= f.input :person_id, :as => :hidden, :input_html => { :value =>current_user.id  }%>
+						<%= f.input :date_requested, :as => :hidden, :input_html => { :value =>DateTime.now  }%>
+						<%= f.submit "Submit Course Completion", :class=>"btn btn-primary pull-right col-md-12"%>
+					<% end %>
+					<br />
+					<br />
+			<%end%>
+		</div>
+		<div class="row">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Tools Covered</h3>
+			  </div>
+			  <div class="panel-body">
+				<dl>
+					<%@course.categories.each do |cat|%>
+						<dt><%=link_to cat.name, cat%></dt>
+						<dd>
+							<ul>
+								<%cat.tools.each do |tool|%>
+									<li><%=link_to tool.name, tool%></li>
+								<%end%>
+							</ul>
+						</dd>
+					<%end%>
+				</dl>
+			  </div>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

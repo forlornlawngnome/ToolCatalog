@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tool:</strong>
+  <%= link_to @tool_log.tool.name, @tool_log.tool  %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= link_to @tool_log.person.name, @tool_log.person %>
+</p>
+
+<p>
+  <strong>Time in:</strong>
+  <%= local_time @tool_log.time_in %>
+</p>
+
+<p>
+  <strong>Time out:</strong>
+  <%= local_time @tool_log.time_out %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= Time.at(@tool_log.duration).utc.strftime("%H:%M:%S") rescue "" %>
+</p>
+
+<p>
+  <strong>Tool reservation:</strong>
+  <%= link_to @tool_log.tool_reservation.name, @tool_log.tool_reservation  rescue ""%>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_tool_log_path(@tool_log), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

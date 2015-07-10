@@ -1,0 +1,24 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+		<th>Day of Week</th>
+    	<th>Time open</th>
+    	<th>Time close</th>
+    	<th>Person</th>
+    	<th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% hours.each do |hour| %>
+      <tr>
+		<td><%= link_to Date::DAYNAMES[hour.day_of_week], hour %></td>
+        <td><%= local_time hour.time_open, "%I:%M:%S %p" %></td>
+        <td><%= local_time hour.time_close, "%I:%M:%S %p" %></td>
+        <td><%= link_to hour.person.name, hour.person %></td> 
+        <td><%= link_to fa_icon("pencil"), edit_hour_path(hour) %></td>
+        <td><%= link_to fa_icon("trash-o"), hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,22 @@
+<%color = "red"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Courses Needing Approval</h5>
+</div>
+<dl>
+	<%if @courses_approval.size ==0%>
+		<i>There are no approvals required right now.</i>
+	<%else%>
+		<%@courses_approval.each do |course|%>
+			<dt><%=course[0]%></dt>
+			<dd>
+				<ul>
+					<%course[1].each do |record|%>
+						<li>
+							<%=link_to record.person.name, record%>
+						</li>
+					<%end%>
+				</ul>
+			</dd>
+		<%end%>
+	<%end%>
+</dl>

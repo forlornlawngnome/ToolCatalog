@@ -1,0 +1,9 @@
+<div class="col-md-12">
+	<h3>Tool Reservations</h3>
+	<hr />
+	<%=link_to "All Tool Reservations", tool_reservations_path%> | 
+	<%= link_to 'New Tool Reservation', new_tool_reservation_path %>
+	<br />
+	<br />
+	<%=render "/tool_reservations/index_table", :tool_reservations => ToolReservation.future%>
+</div>

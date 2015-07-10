@@ -1,0 +1,7 @@
+<h1>Listing Tool Reservations</h1>
+
+<%=render "tool_reservations/index_table", :tool_reservations => @tool_reservations%>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Tool Reservation".html_safe, new_tool_reservation_path, :class=>"btn btn-primary" %>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  image: MyText
+  serial: MyString
+  barcode: MyString
+  date_purchased: 2015-06-16
+  capability: MyText
+  reservable: false
+  max_reservation_time: 1
+
+two:
+  name: MyString
+  description: MyText
+  image: MyText
+  serial: MyString
+  barcode: MyString
+  date_purchased: 2015-06-16
+  capability: MyText
+  reservable: false
+  max_reservation_time: 1

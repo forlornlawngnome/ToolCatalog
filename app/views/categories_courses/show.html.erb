@@ -1,0 +1,16 @@
+<p>
+  <strong>Category:</strong>
+  <%= link_to @categories_course.category.name, @categories_course.category %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= link_to @categories_course.course.name, @categories_course.course %>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_categories_course_path(@categories_course), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

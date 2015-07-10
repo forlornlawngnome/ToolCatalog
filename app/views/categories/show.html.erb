@@ -1,0 +1,69 @@
+<div class="row">
+	<div class="col-md-10">
+		<h2 class="nopadding">
+			<%= @category.name %>
+		</h2>
+	</div>
+	<div class="col-md-2 pull-right">
+		<%if current_user.is_admin%>
+			<%=link_to fa_icon("pencil"), edit_category_path(@category), :class=>"pull-right"%>
+		<%end%>
+	</div>
+</div>
+<hr />
+<div class="row">
+  	<!-- Nav tabs -->
+	<div class="col-md-3">
+		<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
+			<li role="presentation" class="active"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Tools</a></li>
+			<li role="presentation"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">Courses</a></li>
+			<%if current_user.is_admin%>
+				<li role="presentation"><a href="#people" aria-controls="people" role="tab" data-toggle="tab">People</a></li>
+			<%end%>
+	  	</ul>
+  	</div>
+  	<!-- Tab panes -->
+  	<div class="col-md-9">
+	  	<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="tools">
+				<%@category.tools.order(:name).uniq.each do |tool|%>
+					<%=render "/tools/tool_container", :tool=>tool%>
+				<%end%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="courses">
+				<h4>Related Courses</h4>
+				<%@category.courses.order(:name).uniq.each do |course|%>
+					<li><%=link_to course.name, course%></li>
+				<%end%>
+			</div>
+			<%if current_user.is_admin%>
+				<div role="tabpanel" class="tab-pane" id="people">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Person</th>
+								<th>Access Approved?</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%@category.courses_people.each do |person|%>
+								<tr>
+									<td>
+										<%=link_to person.person.name, person.person%>
+									</td>
+									<td>
+										<%=person.approved ? "Approved" : "Pending"%>
+									</td>
+								</tr>
+							<%end%>
+						</tbody>
+					</table>
+				</div>
+			<%end%>
+	  	</div>
+	</div>
+
+</div>
+<div class="row">
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

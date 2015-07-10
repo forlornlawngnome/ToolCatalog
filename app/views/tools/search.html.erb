@@ -1,0 +1,9 @@
+<br />
+<h2>Searching Tools for "<%=params[:search]%>"</h2>
+<%if @tools.empty?%>
+	<i>No results found for this search</i>
+<%else%>
+	<%@tools.each do |tool|%>
+		<%=render "tool_container", :tool=> tool%>
+	<%end%>
+<%end%>

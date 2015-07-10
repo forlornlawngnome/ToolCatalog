@@ -1,0 +1,71 @@
+<div class="panel panel-default">
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-10">
+				<h2 class="nopadding">
+					<%=tool.name%>
+					<%if current_user.tools.include?(tool)%>
+						<%=link_to "Reserve this Tool", new_tool_reservation_path(:tool=>tool), :class=>"btn btn-primary"%>
+					<%end%>
+				</h2>
+			</div>
+			<div class="col-md-2 pull-right">
+				<%if current_user.is_admin%>
+					<%=link_to fa_icon("pencil"), edit_tool_path(tool), :class=>"pull-right"%>
+				<%end%>
+			</div>
+		</div>
+		<hr />
+		<div class="row">
+			<div class="col-md-2">
+				<%if tool.image && !tool.image.empty?%>
+			  		<%= link_to(image_tag(tool.image, :alt => tool.name, :width => "100%", :height => "100%", :title => tool.name), tool) %>
+				<%else%>
+					<i>No image available</i>
+				<%end%>
+			</div>
+			<div class="col-md-10">
+			  	<dl class="dl-horizontal">
+					<dt>Categories:</dt>
+					<dd>
+						<%tool.categories.each do |cat|%>
+							<%=link_to cat.name, cat%>,
+						<%end%>
+					</dd>
+					<dt>Description:</dt>
+					<dd><%=tool.description%></dd>
+					<dt>Capability:</dt>
+					<dd><%=tool.capability%></dd>
+					<dt>Do you have training?</dt>
+					<dd>
+						<%if current_user.tools.include?(tool)%>
+							Yes
+						<%else%>
+							No
+						<%end%>
+					</dd>
+					<dt>Reservable?</dt>
+					<dd><%=tool.reservable%></dd>
+					<dt>Max Reservation Time:</dt>
+					<dd><%=tool.max_reservation_time%> hours</dd> 
+					<dt>Is reserved now?</dt>
+					<dd><%=tool.is_reserved?(DateTime.now)%></dd>
+					<%if current_user.is_admin || current_user.is_student_admin%>
+						<dt>Barcode:</dt>
+						<dd><%=tool.barcode%></dd>
+						<dt>Serial:</dt>
+						<dd><%=tool.serial%></dd>
+						<dt>Date Purchased:</dt>
+						<dd><%=local_time tool.date_purchased, '%B %e, %Y' rescue ""%></dd>
+					<%end%>
+					<dt>Available Courses:</dt>
+					<dd>
+						<%tool.courses.each do |course|%>
+							<%=link_to course.name, course%>,
+						<%end%>
+					</dd>
+				</dl>
+			</div>
+		</div>
+  	</div>
+</div>

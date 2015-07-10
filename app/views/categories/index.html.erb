@@ -1,0 +1,6 @@
+<h1>Listing Categories</h1>
+<%= render "/categories/index_table", :categories=>@categories%>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Category".html_safe, new_category_path, :class=>"btn btn-primary" %>

@@ -1,0 +1,29 @@
+<div class="col-md-12">
+	<h3>Tools</h3>
+	<hr />
+	<%=link_to "All Tools", tools_path%> | 
+	<%= link_to 'New Tool', new_tool_path %>
+	<br />
+	<br />
+
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+		<%@categories.each do |cat|%>
+			<%if cat.tools.size >= 1%>
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id=<%="heading#{cat.name.delete(' ')}"%>>
+						<h4 class="panel-title">
+							<a role="button" data-toggle="collapse" data-parent="#accordion"  href=<%="#collapse#{cat.name.delete(' ')}"%> aria-expanded="true" aria-controls=<%="collapse#{cat.name.delete(' ')}"%>>
+								<%=cat.name.titleize%>
+							</a>
+						</h4>
+					</div>
+					<div id=<%="collapse#{cat.name.delete(' ')}"%> class="panel-collapse collapse" role="tabpanel" aria-labelledby=<%="heading#{cat.name.delete(' ')}"%>>
+						<div class="panel-body">
+							<%=render "/tools/index_table", :tools => cat.tools.order(:name)%>
+						</div>
+					</div>
+				</div>
+			<%end%>
+		<%end%>
+	</div>
+</div>

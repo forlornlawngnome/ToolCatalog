@@ -1,0 +1,58 @@
+<%=simple_form_for(@tool, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Tool Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				<div>
+				  	<!-- Nav tabs -->
+					<div class="col-md-3">
+						<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
+							<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">General</a></li>
+							<li role="presentation"><a href="#category" aria-controls="category" role="tab" data-toggle="tab">Categories</a></li>
+					  	</ul>
+				  	</div>
+				  	<!-- Tab panes -->
+				  	<div class="col-md-9">
+					  	<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="about">
+								<%=f.input :name%>
+								<%=f.input :description%>
+								<%=f.input :image%>
+								<%=f.input :serial%>
+								<%=f.input :barcode%>
+								<%=f.input :date_purchased, as: :string%>
+								<%=f.input :capability%>
+								<%=f.input :reservable%>
+								<%=f.input :max_reservation_time%>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="category">
+								<%= f.association :categories,   as: :check_boxes %>
+							</div>
+					  	</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+<script>
+$('#tool_date_purchased').datetimepicker({
+    dateFormat: 'yy-mm-dd',
+	timeFormat: 'hh:mm TT'});
+</script>

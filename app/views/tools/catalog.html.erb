@@ -1,0 +1,31 @@
+<br />
+<h2>Tool Catalog</h2>
+<hr />
+<div>
+	<div class="col-md-3">
+		<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
+			<li role="presentation" class="active"><a href="#allTools" aria-controls="allTools" role="tab" data-toggle="tab">All Tools</a></li>
+			<%@categories.each do |cat|%>
+				<li role="presentation" ><a href=<%="##{cat.name.delete(' ')}"%> aria-controls=<%="#{cat.name.delete(' ')}"%> role="tab" data-toggle="tab"><%=cat.name.titleize%></a></li>
+			<%end%>
+	  	</ul>
+  	</div>
+  	<!-- Tab panes -->
+  	<div class="col-md-9">
+	  	<div class="tab-content">
+			<div role="tabpanel" class="tab-pane active" id="allTools">
+				<%@tools.each do |tool|%>
+					<%=render "tools/tool_container", :tool => tool%>
+				<%end%>
+			</div>
+			<%@categories.each do |cat|%>
+				<div role="tabpanel" class="tab-pane" id=<%="#{cat.name.delete(' ')}"%>>
+					<%cat.tools.order(:name).each do |tool|%>
+						<%=render "tools/tool_container", :tool => tool%>
+					<%end%>
+				</div>
+			<%end%>
+	  	</div>
+	</div>
+
+</div>

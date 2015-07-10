@@ -1,0 +1,27 @@
+<p>
+  <strong>Day of week:</strong>
+  <%= Date::DAYNAMES[@hour.day_of_week] %>
+</p>
+<p>
+  <strong>Time open:</strong>
+  <%= local_time @hour.time_open, "%I:%M:%S %p" %>
+</p>
+
+<p>
+  <strong>Time close:</strong>
+  <%= local_time @hour.time_close, "%I:%M:%S %p" %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= link_to @hour.person.name, @hour.person %>
+</p>
+
+
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_hour_path(@hour), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

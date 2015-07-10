@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Required hours between maintanance</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% maintanance_types.each do |maintanance_type| %>
+      <tr>
+        <td><%= link_to maintanance_type.name, maintanance_type %></td>
+        <td><%= link_to maintanance_type.category.name, maintanance_type.category %></td>
+        <td><%= maintanance_type.required_hours_between_maintanance %></td>
+        <td><%= link_to fa_icon("pencil"), edit_maintanance_type_path(maintanance_type) %></td>
+        <td><%= link_to fa_icon("trash-o"), maintanance_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

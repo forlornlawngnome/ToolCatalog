@@ -1,0 +1,58 @@
+<%=simple_form_for(@person, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Person Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				<div>
+				  	<!-- Nav tabs -->
+					<div class="col-md-3">
+						<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
+							<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">General Info</a></li>
+							<li role="presentation"><a href="#forms" aria-controls="forms" role="tab" data-toggle="tab">Forms</a></li>
+					  	</ul>
+				  	</div>
+				  	<!-- Tab panes -->
+				  	<div class="col-md-9">
+					  	<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="about">
+								<%=f.input :name %>
+								<%=f.input :email %>
+								<%=f.input :graduation_year %>
+								<%if current_user.id == f.object.id || current_user.is_admin%>
+									<%=f.input :barcode %>
+								<%end%>
+								<%if current_user.is_admin%>
+									<%=f.input :emergency_contact_name %>
+									<%=f.input :emergency_contact_number %>
+									<%=f.input :is_admin %>
+									<%=f.input :is_student_admin %>
+									<%=f.input :archived %>
+								<%end%>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="forms">
+								<%= f.association :forms,   as: :check_boxes %>
+							</div>
+					  	</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

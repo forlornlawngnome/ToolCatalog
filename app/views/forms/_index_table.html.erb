@@ -1,0 +1,28 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+	  <th>Link</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% forms.each do |form| %>
+      <tr>
+        <td><%= link_to form.name, form %></td>
+		<td>
+		  	<%if !form.external_link.nil?%>
+		  		<%= link_to form.external_link, form.external_link, :target=>"_blank"%>
+			<%else%>
+				<i>No Link Supplied</i>
+			<%end%>
+		</td>
+        <td><%= link_to fa_icon("pencil"), edit_form_path(form) %></td>
+        <td><%= link_to fa_icon("trash-o"), form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

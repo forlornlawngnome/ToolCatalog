@@ -1,0 +1,15 @@
+<%color = "blue"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Upcoming Tool Reservations</h5>
+</div>
+<dl>
+	<%if current_user.future_tool_reservations.empty?%>
+		<i>You have no upcoming reservations on record.</i>
+	<%else%>
+		<%current_user.future_tool_reservations.each do |tool_reservation|%>
+			<dt><%=tool_reservation.tool.name%> <span class="pull-right"><%=link_to fa_icon("pencil"), edit_tool_reservation_path(tool_reservation)%></span></dt>
+			<dd><li><%= local_time(tool_reservation.reservation_beginning, "%a %B %d %I:%M")%> - <%= local_time(tool_reservation.reservation_ending, "%I:%M %p")%></li></dd>
+		<%end%>
+	<%end%>
+</dl>
+<%=link_to fa_icon("plus")+" New Reservation", new_tool_reservation_path, :class=>"btn #{color} fixed_bottom"%>

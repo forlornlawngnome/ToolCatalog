@@ -1,0 +1,129 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require twitter/bootstrap
+ *= require_self
+ *= require font-awesome
+ *= require datepicker-blue
+ */
+ .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+ .ui-timepicker-div dl { text-align: left; }
+ .ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+ .ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+ .ui-timepicker-div td { font-size: 90%; }
+ .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+ .ui-timepicker-rtl{ direction: rtl; }
+ .ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+ .ui-timepicker-rtl dl dt{ float: right; clear: right; }
+ .ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+ 
+ ul.thumbnails.per3 > li:nth-child(3n+1) {
+   clear: left;
+ }
+ .positioned {
+ 	position: relative;
+ }
+ .fixed_bottom{
+ 	position :absolute;
+	bottom:12px;
+ }
+ 
+ .jumbotron{
+	 padding:15px;
+ }
+ .alert {
+ 	padding-top:5px;
+	padding-bottom:5px;
+ }
+ 
+ .alert-purple {
+   background-color: #DFD1F7;
+   border-color: #C3B1E2;
+   color: #7C49D6;
+ }
+ .alert-purple h4 {
+   color: #7C49D6;
+ }
+ .bigger-font{
+ font-size:17.5px;
+ }
+ .purple {
+ 	background-color: #DFD1F7!important;
+ 	color: #7C49D6!important;
+ }
+ .purple a{
+ 	color: #7C49D6!important;
+ }
+ .blue {
+ 	background-color: #d9edf7!important;
+ 	color: #3a87ad!important;
+ 	border-color: #e5e5e5!important;
+ }
+ .blue a{
+ 	color: #3a87ad!important;
+ }
+ .red {
+ 	background-color: #f2dede!important;
+ 	color: #b94a48!important;
+ }
+ .red a{
+ 	color: #b94a48!important;
+ }
+ .green {
+ 	background-color: #dff0d8!important;
+ 	color: #468847!important;
+ }
+ .green a{
+ 	color: #468847!important;
+ }
+ .beige {
+ 	background-color: #fcf8e3!important;
+ 	color: #c09853!important;
+ }
+ .beige a{
+ 	color: #c09853!important;
+ }
+ .orange {
+ 	background-color: #ffcb9b!important;
+ 	color: #FF7401!important;
+ }
+ .orange a{
+ 	color: #FF7401!important;
+ }
+ .grey {
+ 	background-color: #eee!important;
+ 	color: inhert!important;
+ }
+ 
+
+ h1,
+ .h1,
+ h2,
+ .h2,
+ h3,
+ .h3 {
+   margin-top: 5px;
+   margin-bottom: 5px;
+ }
+
+
+ h4,
+ .h4,
+ h5,
+ .h5,
+ h6,
+ .h6{
+ margin-top: 5px;
+ margin-bottom: 5px;
+ }

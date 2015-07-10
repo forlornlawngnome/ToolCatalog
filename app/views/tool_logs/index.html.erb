@@ -1,0 +1,35 @@
+<h1>Listing Tool Logs</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Person</th>
+      <th>Time in</th>
+      <th>Time out</th>
+      <th>Duration</th>
+      <th>Tool reservation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tool_logs.each do |tool_log| %>
+      <tr>
+        <td><%= link_to tool_log.tool.name, tool_log.tool %></td>
+        <td><%= link_to tool_log.person.name, tool_log.person %></td>
+        <td><%= local_time tool_log.time_in %></td>
+        <td><%= local_time tool_log.time_out unless tool_log.time_out.nil? %></td>
+        <td><%= Time.at(tool_log.duration).utc.strftime("%H:%M:%S") rescue "" %></td>
+        <td><%= link_to tool_log.tool_reservation.name, tool_log.tool_reservation rescue "" %></td>
+        <td><%= link_to 'Show', tool_log %></td>
+        <td><%= link_to fa_icon("pencil"), edit_tool_log_path(tool_log) %></td>
+        <td><%= link_to fa_icon("trash-o"), tool_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Tool Log".html_safe, new_tool_log_path, :class=>"btn btn-primary" %>

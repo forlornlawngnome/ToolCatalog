@@ -1,0 +1,9 @@
+<div class="col-md-12">
+	<h3>Spaces</h3>
+	<hr />
+	<%=link_to "All Spaces", spaces_path%> | 
+	<%= link_to 'New Space', new_space_path %>
+	<br />
+	<br />
+	<%=render "/spaces/index_table", :spaces => Space.all%>
+</div>

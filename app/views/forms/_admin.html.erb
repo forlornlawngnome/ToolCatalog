@@ -1,0 +1,9 @@
+<div class="col-md-12">
+	<h3>Forms</h3>
+	<hr />
+	<%=link_to "All Forms", forms_path%> | 
+	<%= link_to 'New Forms', new_form_path %>
+	<br />
+	<br />
+	<%=render "/forms/index_table", :forms => Form.all%>
+</div>

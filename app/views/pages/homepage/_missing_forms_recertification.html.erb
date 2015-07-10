@@ -1,0 +1,15 @@
+<%color = "red"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Action Required</h5>
+</div>
+<dl>
+	<%if !current_user.missing_forms.empty?%>
+		<h5>Missing Forms</h5>
+		<ul>
+			<%current_user.missing_forms.each do |form|%>
+				<li><%=link_to form.name, form.external_link, :target=>"_blank"%></li>
+			<%end%>
+		</ul>
+	<%end%>
+	<!--Add in recertification if we decide to do it-->
+</dl>

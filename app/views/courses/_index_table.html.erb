@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Additional info</th>
+	  <th>Days Until Recertification is Required</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.name, course %></td>
+        <td><%= course.additional_info %></td>
+		<td><%= course.recertification %></td>
+        <td><%= link_to fa_icon("pencil"), edit_course_path(course) %></td>
+        <td><%= link_to fa_icon("trash-o"), course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  graduation_year: 1
+  barcode: MyString
+  emergency_contact_name: MyString
+  emergency_contact_number: MyString
+  active: false
+  is_admin: false
+  is_student_admin: false
+
+two:
+  name: MyString
+  email: MyString
+  graduation_year: 1
+  barcode: MyString
+  emergency_contact_name: MyString
+  emergency_contact_number: MyString
+  active: false
+  is_admin: false
+  is_student_admin: false

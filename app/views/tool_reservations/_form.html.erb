@@ -1,0 +1,48 @@
+<%=simple_form_for(@tool_reservation, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Tool Reservation Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				<%if current_user.is_admin%>
+					<%=f.input :person_id, :collection=> Person.order("lower(name)"), :include_blank=> true, :selected=> (f.object.new_record? ? current_user.id : f.object.person_id)%>
+				<%else%>
+					<div class="form-group">
+						<%= f.label :person_id, :class=>"col-sm-3 control-label"%>
+						<div class="col-sm-9">
+							<p class="form-control-static"><%=current_user.name%></p>
+							<%=f.input :person_id, :as=>:hidden, :input_html =>{:value=>current_user.id}%>
+						</div>
+					</div>
+				<%end%>
+				<%=f.input :tool_id, :collection=> current_user.tools.reservable.order("lower(tools.name)").uniq, :include_blank=> true, :selected=> (f.object.new_record? ? (defined?(params[:tool]) ? params[:tool] : "") : f.object.person_id)%>
+				<%=f.input :reservation_beginning, :as=>:string%>
+				<%=f.input :reservation_ending, :as=>:string, :label=> "Ending Time"%>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+<script>
+$('#tool_reservation_reservation_beginning').datetimepicker({
+    dateFormat: 'yy-mm-dd',
+	timeFormat: 'hh:mm TT'});
+$('#tool_reservation_reservation_ending').datetimepicker({
+	datepicker:false,
+	timeFormat: 'hh:mm TT',
+	timeOnly: true});
+</script>

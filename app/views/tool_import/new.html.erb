@@ -1,0 +1,48 @@
+<h1>Tool Import</h1>
+
+<p>A CSV file can be used to import records. The first row should be the column names. Don't add spaces before or after the commas. The following columns are allowed. </p>
+
+<dl class="dl-horizontal">
+	<dt>id</dt><dd><span class="label label-info">Unique</span> The identifier in the database. If it's new, leave blank</dd>
+	<dt>name</dt><dd><span class="label label-danger">Required</span> The name of the tool</dd>
+	<dt>description</dt><dd>A searchable description of the tool</dd>
+	<dt>image</dt><dd>A url which links to an image of the tool</dd>
+	<dt>serial</dt><dd>The serial of the tool</dd>
+	<dt>barcode</dt><dd><span class="label label-danger">Required</span> <span class="label label-info">Unique</span> The barcode to check the tool in and out</dd>
+	<dt>date_purchased</dt><dd>The date the tool was purchased</dd>
+	<dt>capability</dt><dd>Any additional info about the tool</dd>
+	<dt>reservable</dt><dd>true/false</dd>
+	<dt>max_reservation_time</dt><dd>An integer representing the maximum hours the tool can be reserved</dd>
+	<dt>category_ids</dt><dd>A list of category IDs. Must be surrounded by quotation marks if entering more than 1. ex. "2,3"</dd>
+	</dl>
+</dl>
+	
+
+<p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+
+<%= form_for ToolImport.new do |f| %>
+  <%if @tool_import && @tool_import.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tool_import.count, "error") %> prohibited this import from completing:</h2>
+      <ul>
+      <% @tool_import.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	<br />
+	<hr />
+	<div class="row">
+		<div class="col-md-10">
+			<div class="field">
+		    	<%= f.file_field :file %>
+			</div>
+		  	<div class="buttons"><%= f.submit "Import", :class=>"btn btn-primary"%></div>
+		</div>
+		<div class="col-md-2 pull-right">
+			<%= link_to "Sample CSV File", new_tool_import_path(format: "csv"), :class=>"btn btn-success pull-right" %>
+		</div>
+	</div>
+	
+<% end %>

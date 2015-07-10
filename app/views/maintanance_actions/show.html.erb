@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @maintanance_action.date %>
+</p>
+
+<p>
+  <strong>Tool:</strong>
+  <%= @maintanance_action.tool.name %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @maintanance_action.person.name %>
+</p>
+
+<p>
+  <strong>Maintanance type:</strong>
+  <%= @maintanance_action.maintanance_type.name %>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_maintanance_action_path(@maintanance_action), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

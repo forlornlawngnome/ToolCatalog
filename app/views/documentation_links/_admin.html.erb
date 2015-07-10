@@ -1,0 +1,9 @@
+<div class="col-md-12">
+	<h3>Course Document Links</h3>
+	<hr />
+	<%=link_to "All Course Document Links", documentation_links_path%> | 
+	<%= link_to 'New Course Document Link', new_documentation_link_path %>
+	<br />
+	<br />
+	<%=render "/documentation_links/index_table", :documentation_links => DocumentationLink.active%>
+</div>

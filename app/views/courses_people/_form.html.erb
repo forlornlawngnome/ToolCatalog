@@ -1,0 +1,38 @@
+<%=simple_form_for(@courses_person, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Course/Person Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				<%=f.input :course_id, collection: Course.order("lower(name)"), input_html: {:include_blank => true}%>
+				<%=f.input :person_id, collection: Person.order("lower(name)"), input_html: {:include_blank => true}%>
+				<%=f.input :date_requested, :as=>:string%>
+				<%if current_user.is_admin%>
+					<%=f.input :approved%>
+					<%=f.input :approver, :as=>:hidden, :input_html => { :value =>current_user.email  }%>
+					<%=f.input :approval_date, :as=>:hidden, :input_html => { :value =>DateTime.now  }%>
+				<%end%>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+<script>
+$('#courses_person_date_requested').datetimepicker({
+    dateFormat: 'yy-mm-dd',
+	timeFormat: 'hh:mm TT'});
+</script>

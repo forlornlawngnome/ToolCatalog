@@ -1,0 +1,35 @@
+<h1>Listing Tools</h1>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Description</th>
+      <th>Serial</th>
+      <th>Barcode</th>
+      <th>Date Purchased</th>
+      <th>Capability</th>
+      <th>Reservable?</th>
+      <th>Maximum Reservation Time</th>
+      <th></th>
+	  <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tools.each do |tool| %>
+      <tr>
+        <td><%= link_to tool.name, tool %></td>
+        <td><%= tool.description %></td>
+        <td><%= tool.serial %></td>
+        <td><%= tool.barcode %></td>
+        <td><%= tool.date_purchased %></td>
+        <td><%= tool.capability %></td>
+        <td><%= tool.reservable %></td>
+        <td><%= tool.max_reservation_time %></td>
+        <td><%= link_to fa_icon("pencil"), edit_tool_path(tool) %></td>
+        <td><%= link_to fa_icon("trash-o"), tool, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "#{fa_icon("plus")} New Tool".html_safe, new_tool_path, :class=>"btn btn-primary" %>

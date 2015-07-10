@@ -1,0 +1,112 @@
+<h2>Hey, I'm an admin!</h2>
+<hr />
+
+<div>
+  	<!-- Nav tabs -->
+	<div class="col-md-3">
+		<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
+			<li role="presentation" ><a href="#categories" aria-controls="categories" role="tab" data-toggle="tab">Categories</a></li>
+			<li role="presentation"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">Courses</a></li>
+			<li role="presentation"><a href="#courses_people" aria-controls="courses_people" role="tab" data-toggle="tab">Course Approvals***</a></li>
+			<li role="presentation"><a href="#documentation_links" aria-controls="documentation_links" role="tab" data-toggle="tab">Course Documentation Links</a></li>
+			<li role="presentation"><a href="#forms" aria-controls="forms" role="tab" data-toggle="tab">Forms</a></li>
+			<li role="presentation"><a href="#forms_people" aria-controls="forms_people" role="tab" data-toggle="tab">Forms/People***</a></li>
+			<li role="presentation"><a href="#hours" aria-controls="hours" role="tab" data-toggle="tab">Hours</a></li>
+			<li role="presentation"><a href="#hour_exceptions" aria-controls="hour_exceptions" role="tab" data-toggle="tab">Hour Exceptions</a></li>
+			<li role="presentation"><a href="#maintanance_actions" aria-controls="maintanance_actions" role="tab" data-toggle="tab">Maintanance Completed/Due</a></li>
+			<li role="presentation"><a href="#maintanance_types" aria-controls="maintanance_types" role="tab" data-toggle="tab">Maintanance Types</a></li>
+			<li role="presentation"><a href="#people" aria-controls="people" role="tab" data-toggle="tab">People</a></li>
+			<li role="presentation"><a href="#spaces" aria-controls="spaces" role="tab" data-toggle="tab">Spaces</a></li>
+			<li role="presentation"><a href="#space_reservations" aria-controls="space_reservations" role="tab" data-toggle="tab">Space Reservations</a></li>
+			<li role="presentation" class="active"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Tools</a></li>
+			<li role="presentation"><a href="#tool_reservations" aria-controls="tool_reservations" role="tab" data-toggle="tab">Tool Reservations</a></li>
+			<li role="presentation"><a href="#other" aria-controls="other" role="tab" data-toggle="tab">Other Objects</a></li>
+	  	</ul>
+  	</div>
+  	<!-- Tab panes -->
+  	<div class="col-md-9">
+	  	<div class="tab-content">
+			<div role="tabpanel" class="tab-pane" id="categories">
+				<%=render "categories/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="courses">
+				<%=render "courses/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="courses_people">
+				<%=render "courses_people/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="documentation_links">
+				<%=render "documentation_links/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="forms">
+				<%=render "forms/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="forms_people">
+				<%=render "forms_people/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="hours">
+				<%=render "hours/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="hour_exceptions">
+				<%=render "hour_exceptions/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="maintanance_actions">
+				<%=render "maintanance_actions/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="maintanance_types">
+				<%=render "maintanance_types/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="people">
+				<%=render "people/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="spaces">
+				<%=render "spaces/admin"%>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="space_reservations">
+				<%=render "space_reservations/admin"%>
+			</div>
+	    	<div role="tabpanel" class="tab-pane active" id="tools">
+	    		<%=render "tools/admin"%>
+	    	</div>
+	    	<div role="tabpanel" class="tab-pane" id="tool_reservations">
+	    		<%=render "tool_reservations/admin"%>
+	    	</div>
+			<div role="tabpanel" class="tab-pane" id="other">
+				<div class="col-md-12">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Object Type</th>
+								<th>List of All</th>
+								<th>Create New</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Categories/Tools</td>
+								<td><%=link_to "All Categories/Tools", categories_tools_path%></td>
+								<td><%= link_to 'New Category/Tool', new_categories_tool_path %></td>
+							</tr>
+							<tr>
+								<td>Categories/Courses</td>
+								<td><%=link_to "All Categories/Courses", categories_courses_path%></td>
+								<td><%= link_to 'New Categorie/Course', new_categories_course_path%></td>
+							</tr>
+							<tr>
+								<td>Timelogs</td>
+								<td><%=link_to "All Timelogs", timelogs_path%></td>
+								<td><%= link_to 'New Timelog', new_timelog_path%></td>
+							</tr>
+							<tr>
+								<td>Tool logs</td>
+								<td><%=link_to "All Tool Logs", tool_logs_path%></td>
+								<td><%= link_to 'New Tool Log', new_tool_log_path%></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+	  	</div>
+	</div>
+
+</div>

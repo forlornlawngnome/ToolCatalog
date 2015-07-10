@@ -1,0 +1,9 @@
+<div class="col-md-12">
+	<h3>Hours</h3>
+	<hr />
+	<%=link_to "All Hours", hours_path%> | 
+	<%= link_to 'New Hour', new_hour_path %>
+	<br />
+	<br />
+	<%=render "/hours/index_table", :hours => Hour.all%>
+</div>

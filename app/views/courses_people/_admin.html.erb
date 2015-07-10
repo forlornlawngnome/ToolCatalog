@@ -1,0 +1,33 @@
+<div class="col-md-12">
+	<h3>Course Approvals</h3>
+	<hr />
+	<%=link_to "All Course Approvals", courses_people_path%> | 
+	<%= link_to 'New Course Approval', new_courses_person_path %>
+	<br />
+	<br />
+	
+	<table class="table table-hover">
+		<thead>
+	    	<tr>
+				<th><%=check_box_tag :approve%></th>
+	      	  	<th>Course</th>
+		      	<th>Person</th>
+		      	<th>Date requested</th>
+		      	<th colspan="2"></th>
+	    	</tr>
+	  	</thead>
+
+	  	<tbody>
+	    	<% CoursesPerson.not_approved.each do |courses_person| %>
+		      	<tr>
+					<td><%=check_box_tag :approve%></td>
+			        <td><%= link_to courses_person.course.name, courses_person.course %></td>
+			        <td><%= link_to courses_person.person.name, courses_person.person %></td>
+			        <td><%= local_time courses_person.date_requested, "%B %d, %Y" %></td>
+			        <td><%= link_to fa_icon("pencil"), edit_courses_person_path(courses_person) %></td>
+			        <td><%= link_to fa_icon("trash-o"), courses_person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		      	</tr>
+	    	<% end %>
+	  	</tbody>
+	</table>
+</div>

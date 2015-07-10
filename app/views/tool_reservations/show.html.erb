@@ -1,0 +1,31 @@
+<p>
+  <strong>Person:</strong>
+  <%= link_to @tool_reservation.person.name, @tool_reservation.person %>
+</p>
+
+<p>
+  <strong>Tool:</strong>
+  <%= link_to @tool_reservation.tool.name, @tool_reservation.tool %>
+</p>
+
+<p>
+  <strong>Reservation beginning:</strong>
+  <%= local_time @tool_reservation.reservation_beginning %>
+</p>
+
+<p>
+  <strong>Reservation ending:</strong>
+  <%= local_time @tool_reservation.reservation_ending %>
+</p>
+<p>
+  <strong>Duration:</strong>
+  <%= @tool_reservation.duration %>
+</p>
+<br />
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_tool_reservation_path(@tool_reservation), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

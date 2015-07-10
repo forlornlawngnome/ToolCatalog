@@ -1,0 +1,56 @@
+<%=simple_form_for(@course, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f|%>
+	<div class="col-md-2">
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				Course Form
+			</div>
+			<div class="panel-body">
+ 				<%= f.error_notification %>
+				<div>
+				  	<!-- Nav tabs -->
+					<div class="col-md-3">
+						<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
+							<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">General Info</a></li>
+							<li role="presentation"><a href="#links" aria-controls="links" role="tab" data-toggle="tab">Documentation Links</a></li>
+					  	</ul>
+				  	</div>
+				  	<!-- Tab panes -->
+				  	<div class="col-md-9">
+					  	<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="about">
+								<%=f.input :name%>
+								<%=f.input :additional_info%>
+								<%=f.input :recertification%>
+								<%= f.association :categories,   as: :check_boxes %>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="links">
+								<div id="documentation_links">
+									<%= f.simple_fields_for :documentation_links do |p| %>
+										<%=render 'documentation_link_fields', :f => p%>
+										<div class="links">
+											<%=link_to_add_association 'Add Documentation Link', f, :documentation_links%>
+										</div>
+							      	<% end %>
+								</div>
+							</div>
+					  	</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-8">
+						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>
+

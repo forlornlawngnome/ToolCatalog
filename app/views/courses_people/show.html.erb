@@ -1,0 +1,33 @@
+<p>
+  <strong>Course:</strong>
+  <%=link_to @courses_person.course.name, @courses_person.course %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%=link_to @courses_person.person.name, @courses_person.person %>
+</p>
+
+<p>
+  <strong>Date requested:</strong>
+  <%=local_time @courses_person.date_requested rescue ""%>
+</p>
+
+<p>
+  <strong>Approver:</strong>
+  <%= @courses_person.approver %>
+</p>
+
+<p>
+  <strong>Approved:</strong>
+  <%= @courses_person.approved %>
+</p>
+
+<p>
+  <strong>Approval date:</strong>
+  <%= @courses_person.approval_date rescue ""%>
+</p>
+<%if current_user.is_admin%>
+	<%= link_to fa_icon("pencil"), edit_courses_person_path(@courses_person), :class=>"btn btn-primary" %> 
+<%end%>
+<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>

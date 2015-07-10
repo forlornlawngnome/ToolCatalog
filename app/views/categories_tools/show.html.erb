@@ -1,0 +1,16 @@
+<p>
+  <strong>Tool:</strong>
+  <%= link_to @categories_tool.tool.name, @categories_tool.tool %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= link_to @categories_tool.category.name, @categories_tool.category %>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_categories_tool_path(@categories_tool) , :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

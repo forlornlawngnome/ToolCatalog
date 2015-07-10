@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: 
+  person_id: 
+  date_requested: 2015-06-16
+  approver: MyString
+  approved: false
+  approval_date: 2015-06-16
+
+two:
+  course_id: 
+  person_id: 
+  date_requested: 2015-06-16
+  approver: MyString
+  approved: false
+  approval_date: 2015-06-16

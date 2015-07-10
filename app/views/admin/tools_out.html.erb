@@ -1,0 +1,27 @@
+<h2>Tools Checked Out</h2>
+<ul>
+	<%if @tools_out.size == 0%>
+		<i>All tools are checked in.</i>
+	<%else%>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Tool</th>
+					<th>Person</th>
+					<th>Time Out</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<%@tools_out.each do |tool_log|%>
+					<tr>
+						<td><%=link_to tool_log.tool.name, tool_log.tool%></td>
+						<td><%=link_to tool_log.person.name, tool_log.person%></td>
+						<td><%=local_time tool_log.time_in%></td>
+						<td><%=link_to fa_icon("pencil"), edit_tool_log_path(tool_log)%></td>
+					</tr>
+				<%end%>
+			</tbody>
+		</table>
+	<%end%>
+</ul>

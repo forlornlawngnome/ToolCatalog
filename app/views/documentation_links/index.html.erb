@@ -1,0 +1,30 @@
+<h1>Listing Documentation Links</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Link</th>
+      <th>Course</th>
+      <th>Active</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @documentation_links.each do |documentation_link| %>
+      <tr>
+        <td><%= link_to documentation_link.name, documentation_link %></td>
+        <td><%= link_to documentation_link.link, documentation_link.link, :target=>"_blank" %></td>
+        <td><%= link_to documentation_link.course.name, documentation_link.course, :target=>"_blank" %></td>
+        <td><%= documentation_link.active %></td>
+        <td><%= link_to fa_icon("pencil"), edit_documentation_link_path(documentation_link) %></td>
+        <td><%= link_to fa_icon("trash-o"), documentation_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Documentaiton Link".html_safe, new_documentation_link_path, :class=>"btn btn-primary" %>

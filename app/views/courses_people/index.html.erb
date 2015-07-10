@@ -1,0 +1,7 @@
+<h1>Listing Courses/People</h1>
+
+<%=render "courses_people/index_table", :courses_people=>@courses_people%>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Course/Person".html_safe, new_courses_person_path, :class=>"btn btn-primary" %>

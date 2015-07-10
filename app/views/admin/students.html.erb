@@ -1,0 +1,40 @@
+<h1>Current People</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Graduation year</th>
+      <th>Barcode</th>
+      <th>Emergency contact name</th>
+      <th>Emergency contact number</th>
+      <th>Archived?</th>
+      <th>Is admin</th>
+      <th>Is student admin</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= link_to person.name, person %></td>
+        <td><%= person.email %></td>
+        <td><%= person.graduation_year %></td>
+        <td><%= person.barcode %></td>
+        <td><%= person.emergency_contact_name %></td>
+        <td><%= person.emergency_contact_number %></td>
+        <td><%= person.archived %></td>
+        <td><%= person.is_admin %></td>
+        <td><%= person.is_student_admin %></td>
+        <td><%= link_to fa_icon("pencil"), edit_person_path(person) %></td>
+        <td><%= link_to fa_icon("trash-o"), person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Person".html_safe, new_person_path, :class=>"btn btn-primary" %>

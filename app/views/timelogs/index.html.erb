@@ -1,0 +1,31 @@
+<h1>Listing Timelogs</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Time in</th>
+      <th>Time out</th>
+      <th>Duration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timelogs.each do |timelog| %>
+      <tr>
+        <td><%= link_to timelog.person.name, timelog.person %></td>
+        <td><%= local_time timelog.time_in %></td>
+        <td><%= local_time timelog.time_out unless timelog.time_out.nil?%></td>
+        <td><%= Time.at(timelog.duration).utc.strftime("%H:%M:%S") rescue ""%></td>
+        <td><%= link_to 'Show', timelog %></td>
+        <td><%= link_to fa_icon("pencil"), edit_timelog_path(timelog) %></td>
+        <td><%= link_to fa_icon("trash-o"), timelog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Timelog".html_safe, new_timelog_path, :class=>"btn btn-primary" %>

@@ -1,0 +1,7 @@
+<h1>Listing Spaces</h1>
+
+<%=render "spaces/index_table", :spaces=>@spaces%>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Space".html_safe, new_space_path, :class=>"btn btn-primary" %>
