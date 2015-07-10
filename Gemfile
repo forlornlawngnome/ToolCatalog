@@ -36,8 +36,6 @@ gem 'simple_form'
 gem 'cocoon'
 gem 'jquery-ui-rails' # Datetime jquery picker
 
-gem 'protected_attributes' #used on csv/xml import
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
