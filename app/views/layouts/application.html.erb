@@ -17,21 +17,23 @@
 <% end %>
 	<div class="container-fluid">
 		<%=render "/layouts/nav"%>
-		<div class="col-md-1">
-		</div>
-		<div class="col-md-10">
-			<%if notice%>
-				<div class="alert alert-success" data-dismiss="alert">
-					<%= notice %>
-					<span aria-hidden="true" class="pull-right"><%=fa_icon("close")%></span>
-				</div>
-			<%elsif alert%>
-				<div class="alert alert-danger" data-dismiss="alert">
-					<%= alert %>
-					<span aria-hidden="true" class="pull-right"><%=fa_icon("close")%></span>
-				</div>
-			<%end%>
-			<%= yield %>
+		<div class="row">
+			<div class="col-md-1">
+			</div>
+			<div class="col-md-10">
+				<%if notice%>
+					<div class="alert alert-success" data-dismiss="alert">
+						<%= notice %>
+						<span aria-hidden="true" class="pull-right"><%=fa_icon("close")%></span>
+					</div>
+				<%elsif alert%>
+					<div class="alert alert-danger" data-dismiss="alert">
+						<%= alert %>
+						<span aria-hidden="true" class="pull-right"><%=fa_icon("close")%></span>
+					</div>
+				<%end%>
+				<%= yield %>
+			</div>
 		</div>
 	</div>
 </body>
