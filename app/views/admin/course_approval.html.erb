@@ -1,0 +1,32 @@
+<%if current_user.is_admin%>
+	<%= form_tag update_many_courses_people_path, :method => :put do %>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Course</th>
+					<th>Person</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+	  			<% @courses_people.each do |courses_people|%>
+					<tr>
+		    			<%= fields_for "courses_people[]", courses_people do |f| %>
+		      	  			<td><%= link_to courses_people.course.name, courses_people.course %></td>
+							<td><%= link_to courses_people.person.name, courses_people.person %></td>
+							<td>
+		   						<%=f.hidden_field :approver, :value =>current_user.email%>
+		   						<%=f.hidden_field :approval_date, :value =>DateTime.now%>
+			      		  		<%=f.check_box :approved%>
+							</td>
+		    			<% end %>
+					</tr>
+	  			<% end %>
+  			
+			</tbody>
+		</table>
+		<p><%= submit_tag "Submit" %></p>
+	<% end %>
+<%else%>
+	<%=render "/layouts/no_approval"%>
+<%end%>
