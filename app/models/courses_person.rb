@@ -7,7 +7,8 @@ class CoursesPerson < ActiveRecord::Base
   validates :person_id, :uniqueness=>{:scope=>:course_id}
   
   scope :approved, ->{where(:approved=>true)}
-  scope :not_approved, ->{where(:approved=>false)}
+  scope :not_approved, ->{where("courses_people.id not in (?)",approved.pluck(:id)) }
+
 
   def check_approval
     if !self.approved

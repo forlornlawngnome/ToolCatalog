@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   resources :timelogs
 
-  resources :courses_people
+  resources :courses_people do
+    collection do 
+      put :update_many
+    end
+  end
 
   resources :documentation_links
 

@@ -14,5 +14,6 @@ class AdminController < ApplicationController
     @users = Person.active.order("name")
   end
   def course_approval
+    @courses_people = CoursesPerson.not_approved.includes(:course).order("courses.name")
   end
 end

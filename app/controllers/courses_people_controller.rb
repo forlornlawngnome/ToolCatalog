@@ -25,7 +25,6 @@ class CoursesPeopleController < ApplicationController
   # POST /courses_people.json
   def create
     @courses_person = CoursesPerson.new(courses_person_params)
-
     respond_to do |format|
       if @courses_person.save
         format.html { redirect_to @courses_person.course, notice: 'Courses/person was successfully created.' }
@@ -58,6 +57,26 @@ class CoursesPeopleController < ApplicationController
     respond_to do |format|
       format.html { redirect_to courses_people_url, notice: 'Courses person was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def update_many
+    @errors = Array.new
+    
+    params[:courses_people].each do |cp|
+      if cp[1][:approved] == "1"
+        course_person = CoursesPerson.find_by_id(cp[0])
+        if !course_person.update(cp[1])
+          @errors.push course_person.errors
+        end
+      end
+    end
+    @courses_people = CoursesPerson.not_approved.includes(:course).order("courses.name")
+    if @errors.empty?
+      flash[:notice] = "Course Approvals Updated"
+      redirect_to admin_course_approval_path
+    else
+      render :action => "course_approval", :controller=>"admin"
     end
   end
 
