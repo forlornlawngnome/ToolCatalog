@@ -1,8 +1,8 @@
 class Tool < ActiveRecord::Base
   has_and_belongs_to_many :categories
-  has_many :maintanance_types, :through=>:categories
+  has_many :maintenance_types, :through=>:categories
   has_many :courses, :through=>:categories
-  has_many :maintanance_actions
+  has_many :maintenance_actions
   has_many :tool_reservations
   has_many :tool_logs
   
@@ -22,22 +22,22 @@ class Tool < ActiveRecord::Base
     return Tool.where("id in (?)", tools.map { |x| x[:id] }).order(:name)
   end
   def needs_action?
-    if self.maintanance_action_required.size <=0
+    if self.maintenance_action_required.size <=0
       return false
     else
       return true
     end
   end
-  def maintanance_action_required
+  def maintenance_action_required
     actions = Array.new
-    self.maintanance_types.each do |type|
-      last_action =  MaintananceAction.where("maintanance_type_id = ? and tool_id = ?", type.id, self.id).order("date desc").first
+    self.maintenance_types.each do |type|
+      last_action =  MaintenanceAction.where("maintenance_type_id = ? and tool_id = ?", type.id, self.id).order("date desc").first
       
-      hours_ago = (type.required_hours_between_maintanance).days.ago
+      hours_ago = (type.required_hours_between_maintenance).days.ago
       if last_action.nil? 
         if !self.date_purchased || self.date_purchased <= hours_ago
           #If there is no date purchased or 
-          #If the date purchased <= than (longer ago than) the date which maintanance must be done (hours_ago),
+          #If the date purchased <= than (longer ago than) the date which maintenance must be done (hours_ago),
           #Then add it to the list
           actions.push type
         end

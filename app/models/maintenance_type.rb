@@ -1,6 +1,6 @@
-class MaintananceType < ActiveRecord::Base
+class MaintenanceType < ActiveRecord::Base
   belongs_to :category
-  has_many :maintanance_actions
+  has_many :maintenance_actions
   
   validates :name, :presence => true
   validates :name, :uniqueness => true

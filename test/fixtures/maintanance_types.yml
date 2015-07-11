@@ -3,9 +3,9 @@
 one:
   name: MyString
   category_id: 
-  required_hours_between_maintanance: 1
+  required_hours_between_maintenance: 1
 
 two:
   name: MyString
   category_id: 
-  required_hours_between_maintanance: 1
+  required_hours_between_maintenance: 1

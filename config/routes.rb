@@ -25,9 +25,9 @@ Rails.application.routes.draw do
 
   resources :hours
 
-  resources :maintanance_actions
+  resources :maintenance_actions
 
-  resources :maintanance_types
+  resources :maintenance_types
 
   resources :categories_tools
 

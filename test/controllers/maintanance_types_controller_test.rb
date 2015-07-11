@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class MaintananceTypesControllerTest < ActionController::TestCase
+class MaintenanceTypesControllerTest < ActionController::TestCase
   setup do
-    @maintanance_type = maintanance_types(:one)
+    @maintenance_type = maintenance_types(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:maintanance_types)
+    assert_not_nil assigns(:maintenance_types)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class MaintananceTypesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create maintanance_type" do
-    assert_difference('MaintananceType.count') do
-      post :create, maintanance_type: { category_id: @maintanance_type.category_id, name: @maintanance_type.name, required_hours_between_maintanance: @maintanance_type.required_hours_between_maintanance }
+  test "should create maintenance_type" do
+    assert_difference('MaintenanceType.count') do
+      post :create, maintenance_type: { category_id: @maintenance_type.category_id, name: @maintenance_type.name, required_hours_between_maintenance: @maintenance_type.required_hours_between_maintenance }
     end
 
-    assert_redirected_to maintanance_type_path(assigns(:maintanance_type))
+    assert_redirected_to maintenance_type_path(assigns(:maintenance_type))
   end
 
-  test "should show maintanance_type" do
-    get :show, id: @maintanance_type
+  test "should show maintenance_type" do
+    get :show, id: @maintenance_type
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @maintanance_type
+    get :edit, id: @maintenance_type
     assert_response :success
   end
 
-  test "should update maintanance_type" do
-    patch :update, id: @maintanance_type, maintanance_type: { category_id: @maintanance_type.category_id, name: @maintanance_type.name, required_hours_between_maintanance: @maintanance_type.required_hours_between_maintanance }
-    assert_redirected_to maintanance_type_path(assigns(:maintanance_type))
+  test "should update maintenance_type" do
+    patch :update, id: @maintenance_type, maintenance_type: { category_id: @maintenance_type.category_id, name: @maintenance_type.name, required_hours_between_maintenance: @maintenance_type.required_hours_between_maintenance }
+    assert_redirected_to maintenance_type_path(assigns(:maintenance_type))
   end
 
-  test "should destroy maintanance_type" do
-    assert_difference('MaintananceType.count', -1) do
-      delete :destroy, id: @maintanance_type
+  test "should destroy maintenance_type" do
+    assert_difference('MaintenanceType.count', -1) do
+      delete :destroy, id: @maintenance_type
     end
 
-    assert_redirected_to maintanance_types_path
+    assert_redirected_to maintenance_types_path
   end
 end

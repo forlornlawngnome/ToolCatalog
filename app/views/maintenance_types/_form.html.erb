@@ -1,4 +1,4 @@
-<%=simple_form_for(@maintanance_action, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
+<%=simple_form_for(@maintenance_type, html: { class: 'form-horizontal' },wrapper: :horizontal_form,
   wrapper_mappings: {
     check_boxes: :horizontal_radio_and_checkboxes,
     radio_buttons: :horizontal_radio_and_checkboxes,
@@ -10,14 +10,13 @@
 	<div class="col-md-8">
 		<div class="panel panel-info">
 			<div class="panel-heading">
-				Maintanance Action Form
+				Category/Course Form
 			</div>
 			<div class="panel-body">
  				<%= f.error_notification %>
-				<%= f.input :date, as: :string %>
-				<%=f.input :tool_id, collection: Tool.order("lower(name)"), input_html: {:include_blank => true}%>
-				<%=f.input :person_id, collection: Person.order("lower(name)"), input_html: {:include_blank => true}%>
-				<%=f.input :maintanance_type_id, collection: MaintananceType.order("lower(name)"), input_html: {:include_blank => true}%>
+				<%=f.input :name %>
+				<%=f.input :category_id, collection: Category.order("lower(name)"), input_html: {:include_blank => true}%>
+				<%=f.input :required_hours_between_maintenance %>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-8">
 						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
@@ -27,8 +26,3 @@
 		</div>
 	</div>
 <% end %>
-<script>
-$('#maintanance_action_date').datetimepicker({
-    dateFormat: 'yy-mm-dd',
-	timeFormat: 'hh:mm TT'});
-</script>

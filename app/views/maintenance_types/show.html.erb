@@ -1,0 +1,21 @@
+<p>
+  <strong>Name:</strong>
+  <%= @maintenance_type.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= link_to @maintenance_type.category.name, @maintenance_type.category %>
+</p>
+
+<p>
+  <strong>Required hours between maintenance:</strong>
+  <%= @maintenance_type.required_hours_between_maintenance %>
+</p>
+
+<div class="row">
+	<%if current_user.is_admin%>
+		<%=link_to fa_icon("pencil"), edit_maintenance_type_path(@maintenance_type), :class=>"btn btn-primary"%>
+	<%end%>
+	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
+</div>

@@ -1,0 +1,7 @@
+<h1>Listing Maintenance Types</h1>
+
+<%=render "maintenance_types/index_table", :maintenance_types=>@maintenance_types%>
+
+<br>
+
+<%= link_to "#{fa_icon("plus")} New Maintenance Type".html_safe, new_maintenance_type_path, :class=>"btn btn-primary" %>

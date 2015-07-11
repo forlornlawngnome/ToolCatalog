@@ -1,14 +1,14 @@
 require 'test_helper'
 
-class MaintananceActionsControllerTest < ActionController::TestCase
+class MaintenanceActionsControllerTest < ActionController::TestCase
   setup do
-    @maintanance_action = maintanance_actions(:one)
+    @maintenance_action = maintenance_actions(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:maintanance_actions)
+    assert_not_nil assigns(:maintenance_actions)
   end
 
   test "should get new" do
@@ -16,34 +16,34 @@ class MaintananceActionsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create maintanance_action" do
-    assert_difference('MaintananceAction.count') do
-      post :create, maintanance_action: { date: @maintanance_action.date, maintanance_type_id: @maintanance_action.maintanance_type_id, person_id: @maintanance_action.person_id, tool_id: @maintanance_action.tool_id }
+  test "should create maintenance_action" do
+    assert_difference('MaintenanceAction.count') do
+      post :create, maintenance_action: { date: @maintenance_action.date, maintenance_type_id: @maintenance_action.maintenance_type_id, person_id: @maintenance_action.person_id, tool_id: @maintenance_action.tool_id }
     end
 
-    assert_redirected_to maintanance_action_path(assigns(:maintanance_action))
+    assert_redirected_to maintenance_action_path(assigns(:maintenance_action))
   end
 
-  test "should show maintanance_action" do
-    get :show, id: @maintanance_action
+  test "should show maintenance_action" do
+    get :show, id: @maintenance_action
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @maintanance_action
+    get :edit, id: @maintenance_action
     assert_response :success
   end
 
-  test "should update maintanance_action" do
-    patch :update, id: @maintanance_action, maintanance_action: { date: @maintanance_action.date, maintanance_type_id: @maintanance_action.maintanance_type_id, person_id: @maintanance_action.person_id, tool_id: @maintanance_action.tool_id }
-    assert_redirected_to maintanance_action_path(assigns(:maintanance_action))
+  test "should update maintenance_action" do
+    patch :update, id: @maintenance_action, maintenance_action: { date: @maintenance_action.date, maintenance_type_id: @maintenance_action.maintenance_type_id, person_id: @maintenance_action.person_id, tool_id: @maintenance_action.tool_id }
+    assert_redirected_to maintenance_action_path(assigns(:maintenance_action))
   end
 
-  test "should destroy maintanance_action" do
-    assert_difference('MaintananceAction.count', -1) do
-      delete :destroy, id: @maintanance_action
+  test "should destroy maintenance_action" do
+    assert_difference('MaintenanceAction.count', -1) do
+      delete :destroy, id: @maintenance_action
     end
 
-    assert_redirected_to maintanance_actions_path
+    assert_redirected_to maintenance_actions_path
   end
 end

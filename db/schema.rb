@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629003521) do
+ActiveRecord::Schema.define(version: 20150627164317) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -77,11 +77,9 @@ ActiveRecord::Schema.define(version: 20150629003521) do
 
   create_table "forms", force: true do |t|
     t.string   "name"
+    t.text     "external_link"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "link"
-    t.text     "form_link"
-    t.text     "external_link"
   end
 
   create_table "forms_people", force: true do |t|
@@ -115,28 +113,28 @@ ActiveRecord::Schema.define(version: 20150629003521) do
 
   add_index "hours", ["person_id"], name: "index_hours_on_person_id"
 
-  create_table "maintanance_actions", force: true do |t|
+  create_table "maintenance_actions", force: true do |t|
     t.date     "date"
     t.integer  "tool_id"
     t.integer  "person_id"
-    t.integer  "maintanance_type_id"
+    t.integer  "maintenance_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "maintanance_actions", ["maintanance_type_id"], name: "index_maintanance_actions_on_maintanance_type_id"
-  add_index "maintanance_actions", ["person_id"], name: "index_maintanance_actions_on_person_id"
-  add_index "maintanance_actions", ["tool_id"], name: "index_maintanance_actions_on_tool_id"
+  add_index "maintenance_actions", ["maintenance_type_id"], name: "index_maintenance_actions_on_maintenance_type_id"
+  add_index "maintenance_actions", ["person_id"], name: "index_maintenance_actions_on_person_id"
+  add_index "maintenance_actions", ["tool_id"], name: "index_maintenance_actions_on_tool_id"
 
-  create_table "maintanance_types", force: true do |t|
+  create_table "maintenance_types", force: true do |t|
     t.string   "name"
     t.integer  "category_id"
-    t.integer  "required_hours_between_maintanance"
+    t.integer  "required_hours_between_maintenance"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "maintanance_types", ["category_id"], name: "index_maintanance_types_on_category_id"
+  add_index "maintenance_types", ["category_id"], name: "index_maintenance_types_on_category_id"
 
   create_table "people", force: true do |t|
     t.string   "name"

@@ -1,0 +1,25 @@
+<div class="col-md-12">
+	<h3>Maintenance Due</h3>
+	<hr />
+	<%=link_to "All Maintenance Completed", maintenance_actions_path%> | 
+	<%= link_to 'New Maintenance Completed', new_maintenance_action_path %>
+	<br />
+	<br />
+	<dl>
+		<%if @tools_maintenance.size ==0%>
+			<i>There are no tools needing maintenance right now.</i>
+		<%else%>
+			<%@tools_maintenance.each do |tool|%>
+				<%actions = tool.maintenance_action_required%>
+				<dt><%=tool.name%></dt>
+				<dd>
+					<ul>
+						<%actions.each do |action|%>
+							<li><%=link_to action.name, action%></li>
+						<%end%>
+					</ul>
+				</dd>
+			<%end%>
+		<%end%>
+	</dl>
+</div>

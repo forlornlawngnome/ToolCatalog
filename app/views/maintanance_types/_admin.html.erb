@@ -1,9 +1,0 @@
-<div class="col-md-12">
-	<h3>Maintanance Types</h3>
-	<hr />
-	<%=link_to "All Maintanance Types", maintanance_types_path%> | 
-	<%= link_to 'New Maintanance Type', new_maintanance_type_path %>
-	<br />
-	<br />
-	<%=render "/maintanance_types/index_table", :maintanance_types => MaintananceType.all%>
-</div>

@@ -3,7 +3,7 @@ class AdminController < ApplicationController
     @people = Person.active
   end
   def admin_console
-    @tools_maintanance = Tool.needs_action
+    @tools_maintenance = Tool.needs_action
     @categories = Category.order(:name)
   end
   def tools_out
