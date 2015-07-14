@@ -18,7 +18,7 @@ class DocumentationLinksControllerTest < ActionController::TestCase
 
   test "should create documentation_link" do
     assert_difference('DocumentationLink.count') do
-      post :create, documentation_link: { active: @documentation_link.active, course_id: @documentation_link.course_id, link: @documentation_link.link, name: @documentation_link.name }
+      post :create, documentation_link: { active: @documentation_link.active, course_id: @documentation_link.course_id, link: @documentation_link.external_link, name: @documentation_link.name }
     end
 
     assert_redirected_to documentation_link_path(assigns(:documentation_link))
@@ -35,7 +35,7 @@ class DocumentationLinksControllerTest < ActionController::TestCase
   end
 
   test "should update documentation_link" do
-    patch :update, id: @documentation_link, documentation_link: { active: @documentation_link.active, course_id: @documentation_link.course_id, link: @documentation_link.link, name: @documentation_link.name }
+    patch :update, id: @documentation_link, documentation_link: { active: @documentation_link.active, course_id: @documentation_link.course_id, external_link: @documentation_link.external_link, name: @documentation_link.name }
     assert_redirected_to documentation_link_path(assigns(:documentation_link))
   end
 

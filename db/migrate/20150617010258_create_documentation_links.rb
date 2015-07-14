@@ -2,7 +2,7 @@ class CreateDocumentationLinks < ActiveRecord::Migration
   def change
     create_table :documentation_links do |t|
       t.string :name
-      t.string :link
+      t.string :external_link
       t.references :course, index: true
       t.boolean :active
 

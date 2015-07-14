@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150627164317) do
 
   create_table "documentation_links", force: true do |t|
     t.string   "name"
-    t.string   "link"
+    t.string   "external_link"
     t.integer  "course_id"
     t.boolean  "active"
     t.datetime "created_at"
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 20150627164317) do
   create_table "maintenance_types", force: true do |t|
     t.string   "name"
     t.integer  "category_id"
-    t.integer  "required_hours_between_maintenance"
+    t.integer  "required_days_between_maintenance"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -174,8 +174,8 @@ ActiveRecord::Schema.define(version: 20150627164317) do
 
   create_table "timelogs", force: true do |t|
     t.integer  "person_id"
-    t.datetime "time_in"
-    t.datetime "time_out"
+    t.datetime "time_beginning"
+    t.datetime "time_ending"
     t.integer  "duration"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -186,8 +186,8 @@ ActiveRecord::Schema.define(version: 20150627164317) do
   create_table "tool_logs", force: true do |t|
     t.integer  "tool_id"
     t.integer  "person_id"
-    t.datetime "time_in"
-    t.datetime "time_out"
+    t.datetime "time_beginning"
+    t.datetime "time_ending"
     t.integer  "duration"
     t.integer  "tool_reservation_id"
     t.datetime "created_at"

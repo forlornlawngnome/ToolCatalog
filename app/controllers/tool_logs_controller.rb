@@ -34,7 +34,7 @@ class ToolLogsController < ApplicationController
         redirect_to tool_login_path, alert: "No Tool Exists with this ID"
       elsif tool.signed_in
         toollog = tool.signed_in
-        toollog.time_out = Time.now
+        toollog.time_ending = Time.now
         toollog.updated_at = Time.now
         if toollog.save
           redirect_to tool_login_path, notice: "Checked In: #{tool.name}" 
@@ -45,7 +45,7 @@ class ToolLogsController < ApplicationController
         toollog = ToolLog.new
         toollog.person = student
         toollog.tool = tool
-        toollog.time_in = Time.now
+        toollog.time_beginning = Time.now
         toollog.updated_at = Time.now
         
         
@@ -114,6 +114,6 @@ class ToolLogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tool_log_params
-      params.require(:tool_log).permit(:tool_id, :person_id, :time_in, :time_out, :duration, :tool_reservation_id)
+      params.require(:tool_log).permit(:tool_id, :person_id, :time_beginning, :time_ending, :duration, :tool_reservation_id)
     end
 end

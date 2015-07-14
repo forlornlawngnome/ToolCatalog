@@ -18,7 +18,7 @@
 						<tr>
 							<td><%=link_to tool_log.tool.name, tool_log.tool%></td>
 							<td><%=link_to tool_log.person.name, tool_log.person%></td>
-							<td><%=local_time tool_log.time_in%></td>
+							<td><%=local_time tool_log.time_beginning%></td>
 							<td><%=link_to fa_icon("pencil"), edit_tool_log_path(tool_log)%></td>
 						</tr>
 					<%end%>

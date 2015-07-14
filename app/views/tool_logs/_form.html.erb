@@ -16,8 +16,8 @@
  				<%= f.error_notification %>
 				<%=f.input :tool_id, collection: Tool.order("lower(name)"), input_html: {:include_blank => true}%>
 				<%=f.input :person_id, collection: Person.order("lower(name)"), input_html: {:include_blank => true}%>
-				<%=f.input :time_in, as: :string %>
-				<%=f.input :time_out, as: :string %>
+				<%=f.input :time_beginning, as: :string %>
+				<%=f.input :time_ending, as: :string %>
 				<%=f.input :tool_reservation_id, collection: ToolReservation.includes(:tool_log).where(:tool_logs=>{:tool_reservation_id=>nil}), input_html: {:include_blank => true}%>
 				
 				<div class="form-group">
@@ -30,10 +30,10 @@
 	</div>
 <% end %>
 <script>
-$('#tool_log_time_in').datetimepicker({
+$('#tool_log_time_beginning').datetimepicker({
     dateFormat: 'yy-mm-dd',
 	timeFormat: 'hh:mm TT'});
-$('#tool_log_time_out').datetimepicker({
+$('#tool_log_time_ending').datetimepicker({
     dateFormat: 'yy-mm-dd',
 	timeFormat: 'hh:mm TT'});
 </script>

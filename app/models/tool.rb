@@ -33,7 +33,7 @@ class Tool < ActiveRecord::Base
     self.maintenance_types.each do |type|
       last_action =  MaintenanceAction.where("maintenance_type_id = ? and tool_id = ?", type.id, self.id).order("date desc").first
       
-      hours_ago = (type.required_hours_between_maintenance).days.ago
+      hours_ago = (type.required_days_between_maintenance).days.ago
       if last_action.nil? 
         if !self.date_purchased || self.date_purchased <= hours_ago
           #If there is no date purchased or 

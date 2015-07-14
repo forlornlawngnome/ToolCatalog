@@ -1,1 +1,1 @@
-json.extract! @timelog, :id, :person_id, :time_in, :time_out, :duration, :created_at, :updated_at
+json.extract! @timelog, :id, :person_id, :time_beginning, :time_ending, :duration, :created_at, :updated_at

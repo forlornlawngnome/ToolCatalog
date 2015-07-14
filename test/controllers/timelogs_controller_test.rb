@@ -18,7 +18,7 @@ class TimelogsControllerTest < ActionController::TestCase
 
   test "should create timelog" do
     assert_difference('Timelog.count') do
-      post :create, timelog: { duration: @timelog.duration, person_id: @timelog.person_id, time_in: @timelog.time_in, time_out: @timelog.time_out }
+      post :create, timelog: { duration: @timelog.duration, person_id: @timelog.person_id, time_beginning: @timelog.time_beginning, time_ending: @timelog.time_ending }
     end
 
     assert_redirected_to timelog_path(assigns(:timelog))
@@ -35,7 +35,7 @@ class TimelogsControllerTest < ActionController::TestCase
   end
 
   test "should update timelog" do
-    patch :update, id: @timelog, timelog: { duration: @timelog.duration, person_id: @timelog.person_id, time_in: @timelog.time_in, time_out: @timelog.time_out }
+    patch :update, id: @timelog, timelog: { duration: @timelog.duration, person_id: @timelog.person_id, time_beginning: @timelog.time_beginning, time_ending: @timelog.time_ending }
     assert_redirected_to timelog_path(assigns(:timelog))
   end
 

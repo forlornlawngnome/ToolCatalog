@@ -18,7 +18,7 @@ class MaintenanceTypesControllerTest < ActionController::TestCase
 
   test "should create maintenance_type" do
     assert_difference('MaintenanceType.count') do
-      post :create, maintenance_type: { category_id: @maintenance_type.category_id, name: @maintenance_type.name, required_hours_between_maintenance: @maintenance_type.required_hours_between_maintenance }
+      post :create, maintenance_type: { category_id: @maintenance_type.category_id, name: @maintenance_type.name, required_days_between_maintenance: @maintenance_type.required_days_between_maintenance }
     end
 
     assert_redirected_to maintenance_type_path(assigns(:maintenance_type))
@@ -35,7 +35,7 @@ class MaintenanceTypesControllerTest < ActionController::TestCase
   end
 
   test "should update maintenance_type" do
-    patch :update, id: @maintenance_type, maintenance_type: { category_id: @maintenance_type.category_id, name: @maintenance_type.name, required_hours_between_maintenance: @maintenance_type.required_hours_between_maintenance }
+    patch :update, id: @maintenance_type, maintenance_type: { category_id: @maintenance_type.category_id, name: @maintenance_type.name, required_days_between_maintenance: @maintenance_type.required_days_between_maintenance }
     assert_redirected_to maintenance_type_path(assigns(:maintenance_type))
   end
 

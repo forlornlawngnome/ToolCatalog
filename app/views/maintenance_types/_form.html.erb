@@ -16,7 +16,8 @@
  				<%= f.error_notification %>
 				<%=f.input :name %>
 				<%=f.input :category_id, collection: Category.order("lower(name)"), input_html: {:include_blank => true}%>
-				<%=f.input :required_hours_between_maintenance %>
+				<%=f.input :required_days_between_maintenance %>
+				<%=f.input :instructions%>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-8">
 						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>

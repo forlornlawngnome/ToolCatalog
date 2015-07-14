@@ -11,14 +11,14 @@ class ToolLog < ActiveRecord::Base
   validate :is_not_reserved
   
   
-  scope :checked_out, -> {where("time_out IS NULL")}
-  scope :in_today, -> {where("time_in >= ? AND time_out IS NULL", ApplicationHelper.today.utc)}
-  scope :today, -> {where("time_in >= ? ",ApplicationHelper.today.utc).order("updated_at DESC")}
+  scope :checked_out, -> {where("time_ending IS NULL")}
+  scope :in_today, -> {where("time_beginning >= ? AND time_ending IS NULL", ApplicationHelper.today.utc)}
+  scope :today, -> {where("time_beginning >= ? ",ApplicationHelper.today.utc).order("updated_at DESC")}
   
   private
   def set_reservation
     if self.tool_reservation.nil?
-      res = self.tool.reservation_near(self.time_in, 15) # Can check out a bit early for the reservation
+      res = self.tool.reservation_near(self.time_beginning, 15) # Can check out a bit early for the reservation
       if res.nil? || res.empty?
         return self
       elsif res.first.person.id == self.person.id
@@ -29,8 +29,8 @@ class ToolLog < ActiveRecord::Base
     return self
   end
   def is_not_reserved
-    if self.time_out.nil?
-      res = self.tool.reservation_near(self.time_in, 5)
+    if self.time_ending.nil?
+      res = self.tool.reservation_near(self.time_beginning, 5)
       if !res.nil? 
         if res.first.person.id != self.person.id
           errors.add(:tool_id, "This tool has been reserved by someone else for this time period.")
@@ -44,10 +44,10 @@ class ToolLog < ActiveRecord::Base
     end
   end
   def setTimeLogged
-    if self.time_out.nil?
+    if self.time_ending.nil?
       self.duration = 60
     else
-      self.duration = self.time_out - self.time_in
+      self.duration = self.time_ending - self.time_beginning
     end
   end
 end

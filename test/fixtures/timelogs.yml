@@ -2,12 +2,12 @@
 
 one:
   person_id: 
-  time_in: 2015-06-16
-  time_out: 2015-06-16
+  time_beginning: 2015-06-16
+  time_ending: 2015-06-16
   duration: 1
 
 two:
   person_id: 
-  time_in: 2015-06-16
-  time_out: 2015-06-16
+  time_beginning: 2015-06-16
+  time_ending: 2015-06-16
   duration: 1

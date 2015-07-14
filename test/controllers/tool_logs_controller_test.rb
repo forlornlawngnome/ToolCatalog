@@ -18,7 +18,7 @@ class ToolLogsControllerTest < ActionController::TestCase
 
   test "should create tool_log" do
     assert_difference('ToolLog.count') do
-      post :create, tool_log: { duration: @tool_log.duration, person_id: @tool_log.person_id, time_in: @tool_log.time_in, time_out: @tool_log.time_out, tool_id: @tool_log.tool_id, tool_reservation_id: @tool_log.tool_reservation_id }
+      post :create, tool_log: { duration: @tool_log.duration, person_id: @tool_log.person_id, time_beginning: @tool_log.time_beginning, time_ending: @tool_log.time_ending, tool_id: @tool_log.tool_id, tool_reservation_id: @tool_log.tool_reservation_id }
     end
 
     assert_redirected_to tool_log_path(assigns(:tool_log))
@@ -35,7 +35,7 @@ class ToolLogsControllerTest < ActionController::TestCase
   end
 
   test "should update tool_log" do
-    patch :update, id: @tool_log, tool_log: { duration: @tool_log.duration, person_id: @tool_log.person_id, time_in: @tool_log.time_in, time_out: @tool_log.time_out, tool_id: @tool_log.tool_id, tool_reservation_id: @tool_log.tool_reservation_id }
+    patch :update, id: @tool_log, tool_log: { duration: @tool_log.duration, person_id: @tool_log.person_id, time_beginning: @tool_log.time_beginning, time_ending: @tool_log.time_ending, tool_id: @tool_log.tool_id, tool_reservation_id: @tool_log.tool_reservation_id }
     assert_redirected_to tool_log_path(assigns(:tool_log))
   end
 

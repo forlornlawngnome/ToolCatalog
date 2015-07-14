@@ -4,8 +4,8 @@
 <%if current_user.is_admin || current_user.is_student_admin%>
 	<h3>Recent Usage</h3>
 	<hr />
-	<%@tool.tool_logs.order("time_in DESC").limit(20).each do |log|%>
-		<li><%=link_to log.person.name, log.person%>: <%=local_time log.time_in%> - <%=local_time log.time_out rescue ""%></li>
+	<%@tool.tool_logs.order("time_beginning DESC").limit(20).each do |log|%>
+		<li><%=link_to log.person.name, log.person%>: <%=local_time log.time_beginning%> - <%=local_time log.time_ending rescue ""%></li>
 	<%end%>
 <%end%>
 

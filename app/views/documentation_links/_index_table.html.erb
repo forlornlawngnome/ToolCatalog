@@ -12,7 +12,7 @@
     <% documentation_links.each do |documentation_link| %>
       <tr>
         <td><%= link_to documentation_link.name, documentation_link %></td>
-        <td><%= documentation_link.link %></td>
+        <td><%= documentation_link.external_link %></td>
         <td><%= link_to documentation_link.course.name, documentation_link.course %></td>
         <td><%= link_to fa_icon("pencil"), edit_documentation_link_path(documentation_link) %></td>
         <td><%= link_to fa_icon("trash-o"), documentation_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -69,6 +69,6 @@ class MaintenanceTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maintenance_type_params
-      params.require(:maintenance_type).permit(:name, :category_id, :required_hours_between_maintenance)
+      params.require(:maintenance_type).permit(:name, :category_id, :required_days_between_maintenance, :instructions)
     end
 end

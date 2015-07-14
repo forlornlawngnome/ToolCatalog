@@ -30,7 +30,7 @@ class TimelogsController < ApplicationController
         redirect_to lab_login_path, alert: "No Student Exists with this ID"
       elsif student.signed_in
         timelog = student.signed_in
-        timelog.time_out = Time.now
+        timelog.time_ending = Time.now
         timelog.updated_at = Time.now
         if timelog.save
           redirect_to lab_login_path, notice: "Signed Out: #{student.name}" 
@@ -40,7 +40,7 @@ class TimelogsController < ApplicationController
       else
         timelog = Timelog.new
         timelog.person = student
-        timelog.time_in = Time.now
+        timelog.time_beginning = Time.now
         timelog.updated_at = Time.now
         
         student.archived=false
@@ -112,6 +112,6 @@ class TimelogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def timelog_params
-      params.require(:timelog).permit(:person_id, :time_in, :time_out, :duration)
+      params.require(:timelog).permit(:person_id, :time_beginning, :time_ending, :duration)
     end
 end

@@ -9,10 +9,13 @@
 </p>
 
 <p>
-  <strong>Required hours between maintenance:</strong>
-  <%= @maintenance_type.required_hours_between_maintenance %>
+  <strong>Required days between maintenance:</strong>
+  <%= @maintenance_type.required_days_between_maintenance %>
 </p>
-
+<p>
+  <strong>Instructions:</strong>
+  <%= @maintenance_type.instructions %>
+</p>
 <div class="row">
 	<%if current_user.is_admin%>
 		<%=link_to fa_icon("pencil"), edit_maintenance_type_path(@maintenance_type), :class=>"btn btn-primary"%>

@@ -15,8 +15,8 @@
 			<div class="panel-body">
  				<%= f.error_notification %>
 				<%=f.input :person_id, collection: Person.order("lower(name)"), input_html: {:include_blank => true}%>
-				<%=f.input :time_in, as: :string%>
-				<%=f.input :time_out, as: :string%>
+				<%=f.input :time_beginning, as: :string%>
+				<%=f.input :time_ending, as: :string%>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-8">
 						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
@@ -27,10 +27,10 @@
 	</div>
 <% end %>
 <script>
-$('#timelog_time_in').datetimepicker({
+$('#timelog_time_beginning').datetimepicker({
     dateFormat: 'yy-mm-dd',
 	timeFormat: 'hh:mm TT'});
-$('#timelog_time_out').datetimepicker({
+$('#timelog_time_ending').datetimepicker({
     dateFormat: 'yy-mm-dd',
 	timeFormat: 'hh:mm TT'});
 </script>
