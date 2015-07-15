@@ -6,10 +6,17 @@ class CoursesPerson < ActiveRecord::Base
   validates :course_id, :person_id, :presence=>true
   validates :person_id, :uniqueness=>{:scope=>:course_id}
   
-  scope :approved, ->{where(:approved=>true)}
-  scope :not_approved, ->{where("courses_people.id not in (?)",approved.pluck(:id)) }
 
-
+  def self.approved
+    CoursesPerson.where(:approved=>true)
+  end
+  def self.not_approved
+    if !CoursesPerson.approved.empty?
+      CoursesPerson.where("courses_people.id not in (?)",approved.pluck(:id))
+    else
+      CoursesPerson.all
+    end
+  end
   def check_approval
     if !self.approved
       self.approver = nil
