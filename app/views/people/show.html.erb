@@ -19,6 +19,8 @@
 			<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Tools</a></li>
 			<li role="presentation"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">Courses</a></li>
 			<li role="presentation"><a href="#forms" aria-controls="forms" role="tab" data-toggle="tab">Forms</a></li>
+			<li role="presentation"><a href="#timelogs" aria-controls="forms" role="tab" data-toggle="tab">Timelogs</a></li>
+			<li role="presentation"><a href="#toollogs" aria-controls="forms" role="tab" data-toggle="tab">Tool Logs</a></li>
 	  	</ul>
   	</div>
   	<!-- Tab panes -->
@@ -124,6 +126,52 @@
 							</tr>
 						<%end%>
 					</tbody>
+				</table>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="timelogs">
+				<h4>Timelogs</h4>
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+				      <th>Time in</th>
+				      <th>Time out</th>
+				      <th>Duration</th>
+				    </tr>
+				  </thead>
+
+				  <tbody>
+				    <% @person.timelogs.limit(20).order(:time_beginning).each do |timelog| %>
+				      <tr>
+				        <td><%= local_time timelog.time_beginning %></td>
+				        <td><%= local_time timelog.time_ending unless timelog.time_ending.nil?%></td>
+				        <td><%= Time.at(timelog.duration).utc.strftime("%H:%M:%S") rescue ""%></td>
+				      </tr>
+				    <% end %>
+				  </tbody>
+				</table>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="toollogs">
+				<h4>Tool Logs</h4>
+				<table class="table table-hover">
+				  <thead>
+				    <tr>
+						<th>Tool</th>
+				    	<th>Time in</th>
+				      	<th>Time out</th>
+				      	<th>Duration</th>
+				    </tr>
+				  </thead>
+
+				  <tbody>
+				    <% @person.tool_logs.limit(20).order(:time_beginning).each do |toollog| %>
+				      <tr>
+						<td><%= toollog.tool.name %></td>
+				        <td><%= local_time toollog.time_beginning %></td>
+				        <td><%= local_time toollog.time_ending unless toollog.time_ending.nil?%></td>
+				        <td><%= Time.at(toollog.duration).utc.strftime("%H:%M:%S") rescue ""%></td>
+				      </tr>
+				    <% end %>
+				  </tbody>
 				</table>
 			</div>
 	  	</div>
