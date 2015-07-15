@@ -1,24 +1,56 @@
-<p>
-  <strong>Name:</strong>
-  <%= @maintenance_type.name %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= link_to @maintenance_type.category.name, @maintenance_type.category %>
-</p>
-
-<p>
-  <strong>Required days between maintenance:</strong>
-  <%= @maintenance_type.required_days_between_maintenance %>
-</p>
-<p>
-  <strong>Instructions:</strong>
-  <%= @maintenance_type.instructions %>
-</p>
 <div class="row">
-	<%if current_user.is_admin%>
-		<%=link_to fa_icon("pencil"), edit_maintenance_type_path(@maintenance_type), :class=>"btn btn-primary"%>
-	<%end%>
+	<div class="col-md-10">
+		<h2 class="nopadding">
+			<%= @maintenance_type.name %>
+		</h2>
+	</div>
+	<div class="col-md-2 pull-right">
+		<%if current_user.is_admin%>
+			<%=link_to fa_icon("pencil"), edit_maintenance_type_path(@maintenance_type), :class=>"pull-right"%>
+		<%end%>
+	</div>
+</div>
+<hr />
+
+<div class="row">
+	<div class="col-md-offset-1 col-md-7">
+		<div class="row">
+			<p>
+				<strong>Maximum Days Required Between Maintenance:</strong>
+			 	<%= @maintenance_type.required_days_between_maintenance %>
+			</p>
+		</div>
+		<br />
+		<div class="row">
+			<h3>Maintenance Instructions</h3>
+			<hr />
+	  		<%= @maintenance_type.instructions.html_safe %>
+		</div>
+	</div>
+
+	<div class="col-md-3 pull-right">
+		<div class="row">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Tools</h3>
+			  </div>
+			  <div class="panel-body">
+				<dl>
+					<dt><%=link_to @maintenance_type.category.name, @maintenance_type.category%></dt>
+					<dd>
+						<ul>
+							<%@maintenance_type.category.tools.each do |tool|%>
+								<li><%=link_to tool.name, (current_user.is_admin ? new_maintenance_action_path(:tool=>tool) : tool)%></li>
+							<%end%>
+						</ul>
+					</dd>
+				</dl>
+			  </div>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
 	<%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
 </div>
