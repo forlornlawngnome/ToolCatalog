@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20150627164317) do
     t.string   "name"
     t.integer  "category_id"
     t.integer  "required_days_between_maintenance"
+    t.text     "instructions"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
