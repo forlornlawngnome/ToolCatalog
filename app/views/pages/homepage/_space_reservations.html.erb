@@ -3,7 +3,7 @@
 	<h5>Upcoming Space Reservations</h5>
 </div>
 <dl>
-	<%if current_user.future_space_reservations.empty?%>
+	<%if !current_user || current_user.future_space_reservations.empty?%>
 		<i>You have no upcoming reservations on record.</i>
 	<%else%>
 		<%current_user.future_space_reservations.each do |space_reservation|%>

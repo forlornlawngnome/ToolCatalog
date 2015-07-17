@@ -10,7 +10,7 @@
 			<a class="navbar-brand" href=<%=home_path%>>FabLab</a>
 		</div>
 	 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	    	<ul class="nav navbar-nav col-md-4">
+	    	<ul class="nav navbar-nav">
 				<li><a href=<%=lab_login_path%>>Student Login <span class="sr-only"></span></a></li>
 				<li><a href=<%=tool_login_path%>>Tool Checkout <span class="sr-only"></span></a></li>
 				<li><a href=<%=catalog_tools_path%>>Tool Catalog <span class="sr-only"></span></a></li>
@@ -32,20 +32,28 @@
 				</li>
 			</ul>
 	    	<ul class="nav navbar-nav navbar-right">
-				<%if current_user.is_admin%>
-					<li role="presentation" class="dropdown">
-					    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-					      Admin <span class="caret"></span>
-					    </a>
-					    <ul class="dropdown-menu">
-							<li><a href=<%=admin_current_students_path%>>Current People<span class="sr-only"></span></a></li>
-							<li><a href=<%=admin_tools_out_path%>>Tools Checked Out<span class="sr-only"></span></a></li>
-							<li><a href=<%=admin_tool_import_path%>>Import Tools<span class="sr-only"></span></a></li>
-							<li><a href=<%=admin_forms_path%>>Manage Forms<span class="sr-only"></span></a></li>
-					      	<li><a href=<%=admin_course_approval_path%>>Manage Course Approval<span class="sr-only"></span></a></li>
-							<li><a href=<%=admin_path%>>All Pages<span class="sr-only"></span></a></li>
-					    </ul>
-					  </li>
+				<%if current_user%>
+					<p class="navbar-text">Welcome <%=current_user.name.split.first%>!</p>
+				
+					<%if current_user.is_admin%>
+						<li role="presentation" class="dropdown">
+						    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						      Admin <span class="caret"></span>
+						    </a>
+						    <ul class="dropdown-menu">
+								<li><a href=<%=admin_current_students_path%>>Current People<span class="sr-only"></span></a></li>
+								<li><a href=<%=admin_tools_out_path%>>Tools Checked Out<span class="sr-only"></span></a></li>
+								<li><a href=<%=admin_tool_import_path%>>Import Tools<span class="sr-only"></span></a></li>
+								<li><a href=<%=admin_forms_path%>>Manage Forms<span class="sr-only"></span></a></li>
+						      	<li><a href=<%=admin_course_approval_path%>>Manage Course Approval<span class="sr-only"></span></a></li>
+								<li><a href=<%=admin_path%>>All Pages<span class="sr-only"></span></a></li>
+						    </ul>
+						  </li>
+					<%end%>
+					<li><%=link_to "Log Out", logout_path%></li>
+				<%else%>
+					<li><%=link_to "Sign Up", new_person_path%></li>
+					<li><%=link_to "Log In", login_path%></li>
 				<%end%>
 			</ul>
 		</div>

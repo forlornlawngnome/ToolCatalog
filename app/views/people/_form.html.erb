@@ -19,7 +19,9 @@
 					<div class="col-md-3">
 						<ul class="nav nav-pills nav-stacked less-padding" role="tablist">
 							<li role="presentation" class="active"><a href="#about" aria-controls="about" role="tab" data-toggle="tab">General Info</a></li>
-							<li role="presentation"><a href="#forms" aria-controls="forms" role="tab" data-toggle="tab">Forms</a></li>
+							<%if !current_user.nil? && current_user.is_admin%>
+								<li role="presentation"><a href="#forms" aria-controls="forms" role="tab" data-toggle="tab">Forms</a></li>
+							<%end%>
 					  	</ul>
 				  	</div>
 				  	<!-- Tab panes -->
@@ -29,24 +31,27 @@
 								<%=f.input :name %>
 								<%=f.input :email %>
 								<%=f.input :graduation_year %>
-								<%if current_user.id == f.object.id || current_user.is_admin%>
+								<%if f.object.new_record? || (!current_user.nil? && (current_user.id == f.object.id || current_user.is_admin))%>
 									<%=f.input :barcode %>
-								<%end%>
-								<%if current_user.is_admin%>
+									<%=f.input :password %>
+									<%=f.input :password_confirmation %>
 									<%=f.input :emergency_contact_name %>
 									<%=f.input :emergency_contact_number %>
+								<%end%>
+								<%if !current_user.nil? && current_user.is_admin%>
 									<%=f.input :is_admin %>
 									<%=f.input :is_student_admin %>
 									<%=f.input :archived %>
 								<%end%>
 							</div>
-							<div role="tabpanel" class="tab-pane" id="forms">
-								<%= f.association :forms,   as: :check_boxes %>
-							</div>
+							<%if !current_user.nil? && current_user.is_admin%>
+								<div role="tabpanel" class="tab-pane" id="forms">
+									<%= f.association :forms,   as: :check_boxes %>
+								</div>
+							<%end%>
 					  	</div>
 					</div>
 				</div>
-				
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-8">
 						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>

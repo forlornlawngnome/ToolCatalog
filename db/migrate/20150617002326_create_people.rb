@@ -10,6 +10,9 @@ class CreatePeople < ActiveRecord::Migration
       t.boolean :archived
       t.boolean :is_admin
       t.boolean :is_student_admin
+      t.string :password_digest
+      t.string :password_reset_token
+      t.datetime :password_reset_sent_at
 
       t.timestamps
     end

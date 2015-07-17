@@ -3,7 +3,7 @@
 	<h5>Action Required</h5>
 </div>
 <dl>
-	<%if !current_user.missing_forms.empty?%>
+	<%if current_user && !current_user.missing_forms.empty?%>
 		<h5>Missing Forms</h5>
 		<ul>
 			<%current_user.missing_forms.each do |form|%>

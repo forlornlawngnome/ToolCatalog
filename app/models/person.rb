@@ -1,4 +1,5 @@
 class Person < ActiveRecord::Base
+  has_secure_password
   before_save :lowercaseID
   
   
@@ -16,6 +17,7 @@ class Person < ActiveRecord::Base
   has_many :checked_out_tools, :through=>:tool_logs, :source => :tool
  
   validates :name, :email, :graduation_year, :barcode, :presence => true
+  validates :password, :presence => true, :on => :create  
   validates :email, :uniqueness => true
   validates :barcode, :uniqueness => true
   
@@ -47,5 +49,16 @@ class Person < ActiveRecord::Base
   end
   def missing_forms
     Form.where("id not in (?)", self.forms.pluck(:id))
+  end
+  def generate_token(column)
+      begin
+        self[column] = SecureRandom.urlsafe_base64
+      end while Person.exists?(column => self[column])
+    end
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    PersonMailer.password_reset(self).deliver
   end
 end

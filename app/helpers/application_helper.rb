@@ -5,9 +5,6 @@ module ApplicationHelper
   def back_link
     session[:return_to] || home_path
   end
-  def current_user
-    Person.find_by_barcode("1")
-  end
   def self.today
   
     #If it's before midnight...

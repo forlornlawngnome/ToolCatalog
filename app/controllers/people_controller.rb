@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :authorize, :only => [:new, :create]
 
   # GET /people
   # GET /people.json
@@ -28,6 +29,9 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
+        if !current_user
+          session[:person_id] = @person.id  
+        end
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
       else
@@ -69,6 +73,6 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:name, :email, :graduation_year, :barcode, :emergency_contact_name, :emergency_contact_number, :archived, :is_admin, :is_student_admin, :form_ids=>[])
+      params.require(:person).permit(:name, :email, :graduation_year, :barcode, :emergency_contact_name, :emergency_contact_number, :archived, :is_admin, :is_student_admin, :password, :password_confirmation, :password_reset_token, :form_ids=>[])
     end
 end

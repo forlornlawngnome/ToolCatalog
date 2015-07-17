@@ -147,6 +147,9 @@ ActiveRecord::Schema.define(version: 20150627164317) do
     t.boolean  "archived"
     t.boolean  "is_admin"
     t.boolean  "is_student_admin"
+    t.string   "password_digest"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

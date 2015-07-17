@@ -3,7 +3,7 @@
 	<h5>Recently Used Tools</h5>
 </div>
 <dl>
-	<%if current_user.tool_logs.empty?%>
+	<%if !current_user || current_user.tool_logs.empty?%>
 		<i>You have never checked out a tool.</i>
 	<%else%>
 		<ul>

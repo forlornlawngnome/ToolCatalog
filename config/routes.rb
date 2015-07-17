@@ -47,6 +47,14 @@ Rails.application.routes.draw do
   resources :forms
 
   resources :people
+  
+  resources :sessions
+
+  resources :password_resets
+  
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
+  get "signup" => "users#new", :as => "signup"
 
   match 'studentlogin' => 'timelogs#student', via: [:get], :as=>:lab_login
   match 'toollogin' => 'tool_logs#checkout', via: [:get], :as=>:tool_login
