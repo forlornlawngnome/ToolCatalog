@@ -12,7 +12,7 @@
 			<dd>
 				<ul>
 					<%actions.each do |action|%>
-						<li><%=action.name%></li>
+						<li><%=link_to action.name, action%></li>
 					<%end%>
 				</ul>
 			</dd>
