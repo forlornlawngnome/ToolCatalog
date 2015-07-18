@@ -25,8 +25,14 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
+    first = false
+    if Person.all.size < 1
+      first = true
+    end
     @person = Person.new(person_params)
-
+    if first
+      @person.is_admin = true
+    end
     respond_to do |format|
       if @person.save
         if !current_user
