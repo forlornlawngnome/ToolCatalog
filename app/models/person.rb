@@ -45,7 +45,11 @@ class Person < ActiveRecord::Base
     self.space_reservations.future.order(:reservation_beginning).limit(5)
   end
   def available_courses
-    return Course.where("id NOT in (?)",self.courses.pluck(:id)).order(:name)
+    if !self.courses.empty?
+      return Course.where("id NOT in (?)",self.courses.pluck(:id)).order(:name)
+    else
+      return Course.all
+    end
   end
   def missing_forms
     Form.where("id not in (?)", self.forms.pluck(:id))
