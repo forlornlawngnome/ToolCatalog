@@ -1,6 +1,7 @@
 class CoursesPerson < ActiveRecord::Base
-  before_validation :check_approval
   before_save :set_approval
+  before_save :check_approval
+  
   belongs_to :course
   belongs_to :person
   
@@ -19,7 +20,7 @@ class CoursesPerson < ActiveRecord::Base
     end
   end
   def set_approval
-    if !self.approved
+    if self.approved.nil?
       self.approved = false
     end
   end

@@ -3,20 +3,30 @@
 	<h5>Courses Needing Approval</h5>
 </div>
 <dl>
-	<%if @courses_approval.size ==0%>
-		<i>There are no approvals required right now.</i>
-	<%else%>
-		<%@courses_approval.each do |course|%>
-			<dt><%=course[0]%></dt>
-			<dd>
-				<ul>
-					<%course[1].each do |record|%>
-						<li>
-							<%=link_to record.person.name, record%>
-						</li>
-					<%end%>
-				</ul>
-			</dd>
+	<%= form_tag update_many_courses_people_path, :method => :put do %>
+		<%if @courses_approval.size ==0%>
+			<i>There are no approvals required right now.</i>
+		<%else%>
+			<%@courses_approval.each do |course|%>
+				<dt><%=course[0]%></dt>
+				<dd>
+					<ul>
+						<%course[1].each do |record|%>
+							<li>
+				    			<%= fields_for "courses_people[]", record do |f| %>
+									<%=link_to record.person.name, record%>
+									<td>
+				   						<%=f.hidden_field :approver, :value =>current_user.email%>
+				   						<%=f.hidden_field :approval_date, :value =>DateTime.now%>
+					      		  		<%=f.check_box :approved%>
+									</td>
+				    			<% end %>
+								
+							</li>
+						<%end%>
+					</ul>
+				</dd>
+			<%end%>
 		<%end%>
 	<%end%>
 </dl>

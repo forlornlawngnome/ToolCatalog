@@ -49,6 +49,7 @@
 						<%= f.input :course_id, :as => :hidden, :input_html => { :value =>@course.id  }%>
 						<%= f.input :person_id, :as => :hidden, :input_html => { :value =>current_user.id  }%>
 						<%= f.input :date_requested, :as => :hidden, :input_html => { :value =>DateTime.now  }%>
+						<%= f.input :approved, :as=>:hidden, :input_html => { :value =>false }%>
 						<%= f.submit "Submit Course Completion", :class=>"btn btn-primary pull-right col-md-12"%>
 					<% end %>
 					<br />
