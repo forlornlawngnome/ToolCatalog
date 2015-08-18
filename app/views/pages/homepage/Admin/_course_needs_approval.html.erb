@@ -10,24 +10,24 @@
 			<%@courses_approval.each do |course|%>
 				<dt><%=course[0]%></dt>
 				<dd>
-					<ul>
+					<ul class="list-unstyled">
 						<%course[1].each do |record|%>
 							<li>
 				    			<%= fields_for "courses_people[]", record do |f| %>
+									<%=f.check_box :approved%>
 									<%=link_to record.person.name, record%>
-									<td>
-				   						<%=f.hidden_field :approver, :value =>current_user.email%>
-				   						<%=f.hidden_field :approval_date, :value =>DateTime.now%>
-					      		  		<%=f.check_box :approved%>
-									</td>
+			   						<%=f.hidden_field :approver, :value =>current_user.email%>
+			   						<%=f.hidden_field :approval_date, :value =>DateTime.now%>
 				    			<% end %>
-								
+								<div class="pull-right">
+									<%= link_to fa_icon("trash-o"), record, method: :delete, data: { confirm: 'Are you sure?' } %>
+								</div>
 							</li>
 						<%end%>
 					</ul>
 				</dd>
 			<%end%>
 		<%end%>
-		<p><%= submit_tag "Submit" %></p>
+		<p><%= submit_tag "Submit", :class=>"btn #{color} fixed_bottom"%></p>
 	<%end%>
 </dl>
