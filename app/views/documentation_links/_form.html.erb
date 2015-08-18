@@ -15,7 +15,7 @@
 			<div class="panel-body">
  				<%= f.error_notification %>
 				<%=f.input :name%>
-				<%=f.input :link%>
+				<%=f.input :external_link%>
 				<%=f.input :course_id, collection: Course.order("lower(name)"), input_html: {:include_blank => true}%>
 				<%=f.input :active%>
 				<div class="form-group">

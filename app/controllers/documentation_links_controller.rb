@@ -69,6 +69,6 @@ class DocumentationLinksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def documentation_link_params
-      params.require(:documentation_link).permit(:name, :link, :course_id, :active)
+      params.require(:documentation_link).permit(:name, :external_link, :course_id, :active)
     end
 end
