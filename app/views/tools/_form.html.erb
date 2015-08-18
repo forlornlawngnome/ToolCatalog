@@ -30,11 +30,11 @@
 								<%=f.input :description%>
 								<%=f.input :image%>
 								<%=f.input :serial%>
-								<%=f.input :barcode%>
 								<%=f.input :date_purchased, as: :string%>
 								<%=f.input :capability%>
 								<%=f.input :reservable%>
 								<%=f.input :max_reservation_time%>
+								<%=f.input :barcode%>
 							</div>
 							<div role="tabpanel" class="tab-pane" id="category">
 								<%= f.association :categories,   as: :check_boxes %>

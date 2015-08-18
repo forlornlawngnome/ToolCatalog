@@ -32,11 +32,11 @@
 								<%=f.input :email %>
 								<%=f.input :graduation_year %>
 								<%if f.object.new_record? || (!current_user.nil? && (current_user.id == f.object.id || current_user.is_admin))%>
-									<%=f.input :barcode %>
 									<%=f.input :password %>
 									<%=f.input :password_confirmation %>
 									<%=f.input :emergency_contact_name %>
 									<%=f.input :emergency_contact_number %>
+									<%=f.input :barcode %>
 								<%end%>
 								<%if !current_user.nil? && current_user.is_admin%>
 									<%=f.input :is_admin %>
