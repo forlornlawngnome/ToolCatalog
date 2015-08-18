@@ -25,7 +25,7 @@
 						</div>
 					</div>
 				<%end%>
-				<%=f.input :tool_id, :collection=> current_user.tools.reservable.order("lower(tools.name)").uniq, :include_blank=> true, :selected=> (f.object.new_record? ? (defined?(params[:tool]) ? params[:tool] : "") : f.object.tool_id) f.input :tool_id, :collection=> current_user.tools.reservable, :include_blank=> true, :selected=> (f.object.new_record? ? (defined?(params[:tool]) ? params[:tool] : "") : f.object.tool_id)%>
+				<%=f.input :tool_id, :collection=> current_user.tools.reservable.order("lower(tools.name)").uniq, :include_blank=> true, :selected=> (f.object.new_record? ? (defined?(params[:tool]) ? params[:tool] : "") : f.object.tool_id) rescue f.input :tool_id, :collection=> current_user.tools.reservable, :include_blank=> true, :selected=> (f.object.new_record? ? (defined?(params[:tool]) ? params[:tool] : "") : f.object.tool_id)%>
 				<%=f.input :reservation_beginning, :as=>:string%>
 				<%=f.input :reservation_ending, :as=>:string, :label=> "Ending Time"%>
 				<div class="form-group">
