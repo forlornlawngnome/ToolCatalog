@@ -1,5 +1,6 @@
 class CoursesPerson < ActiveRecord::Base
   before_validation :check_approval
+  before_validation :set_approval
   belongs_to :course
   belongs_to :person
   
@@ -15,6 +16,11 @@ class CoursesPerson < ActiveRecord::Base
       CoursesPerson.where("courses_people.id not in (?)",approved.pluck(:id))
     else
       CoursesPerson.all
+    end
+  end
+  def set_approval
+    if self.approved.nil?
+      self.approved = false
     end
   end
   def check_approval
