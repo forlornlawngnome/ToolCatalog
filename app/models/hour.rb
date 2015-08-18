@@ -14,7 +14,7 @@ class Hour < ActiveRecord::Base
    
     
     hours.each do |hour|
-      if hour.time_open.strftime("%H%M%S%N") <= DateTime.now.utc.strftime( "%H%M%S%N" ) && hour.time_close.strftime( "%H%M%S%N" ) >= DateTime.now.utc.strftime( "%H%M%S%N" )
+      if hour.time_open.strftime("%H%M%S%N") <= DateTime.now.strftime( "%H%M%S%N" ) && hour.time_close.strftime( "%H%M%S%N" ) >= DateTime.now.strftime( "%H%M%S%N" )
         return true
       end
     end
