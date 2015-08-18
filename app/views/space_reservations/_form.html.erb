@@ -16,7 +16,7 @@
  				<%= f.error_notification %>
 				
 				<%if current_user.is_admin%>
-					<%=f.input :person_id, :collection=> Person.order("lower(name)"), :include_blank=> true, :selected=> (f.object.new_record? ? current_user.id : f.object.person_id)%>
+					<%=f.input :person_id, :collection=> Person.order("lower(name)"), :include_blank=> true, :selected=> (f.object.new_record? ? current_user.id : f.object.person_id) rescue f.input :person_id, :collection=> Person.all, :include_blank=> true, :selected=> (f.object.new_record? ? current_user.id : f.object.person_id)%>
 				<%else%>
 					<div class="form-group">
 						<%= f.label :person_id, :class=>"col-sm-3 control-label"%>
