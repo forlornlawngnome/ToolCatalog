@@ -33,8 +33,8 @@
 
 	<div class="col-md-3 pull-right">
 		<div class="row">
-			<%if current_user.courses.include?(@course)%>
-				<%course_person = CoursesPerson.where(:course_id => @course.id, :person_id => current_user.id).first%>
+			<%course_person = CoursesPerson.where(:course_id => @course.id, :person_id => current_user.id).first%>
+			<%if !course_person.nil?%>
 				<%if course_person.approved%>
 					<div class="alert alert-success">
 						You have already completed this course!
