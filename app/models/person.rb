@@ -52,7 +52,11 @@ class Person < ActiveRecord::Base
     end
   end
   def missing_forms
-    Form.where("id not in (?)", self.forms.pluck(:id))
+    if self.forms.empty?
+      return Form.order("name")
+    else
+      return Form.where("id not in (?)", self.forms.pluck(:id))
+    end
   end
   def generate_token(column)
       begin
