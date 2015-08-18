@@ -3,6 +3,7 @@
     <tr>
       <th>Name</th>
 	  <th>Link</th>
+	  <th>Required?</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
 				<i>No Link Supplied</i>
 			<%end%>
 		</td>
+		<td><%=form.required%></td>
         <td><%= link_to fa_icon("pencil"), edit_form_path(form) %></td>
         <td><%= link_to fa_icon("trash-o"), form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

@@ -3,4 +3,8 @@ class Form < ActiveRecord::Base
   
   validates :name, :presence => true
   validates :name, :uniqueness => true
+  
+  def self.required
+    Form.where(:required=>true)
+  end
 end

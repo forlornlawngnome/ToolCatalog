@@ -69,6 +69,6 @@ class FormsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_params
-      params.require(:form).permit(:name, :external_link)
+      params.require(:form).permit(:name, :external_link, :required)
     end
 end

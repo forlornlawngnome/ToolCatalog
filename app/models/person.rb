@@ -58,6 +58,19 @@ class Person < ActiveRecord::Base
       return Form.where("id not in (?)", self.forms.pluck(:id))
     end
   end
+  def has_required_forms
+    forms = Form.required
+    if forms.empty?
+      return true
+    else
+      forms.each do |form|
+        if !self.forms.include?(form)
+          return false
+        end
+      end
+    end
+    return true
+  end
   def generate_token(column)
       begin
         self[column] = SecureRandom.urlsafe_base64

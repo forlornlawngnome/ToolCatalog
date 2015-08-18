@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150627164317) do
+ActiveRecord::Schema.define(version: 20150818214917) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150627164317) do
     t.text     "external_link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "required"
   end
 
   create_table "forms_people", force: true do |t|

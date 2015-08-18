@@ -12,6 +12,10 @@
 		<i>No Link Supplied</i>
 	<%end%>
 </p>
+<p>
+  <strong>Required?</strong>
+  <%= @form.required %>
+</p>
 
 <div class="row">
 	<%if current_user.is_admin%>
