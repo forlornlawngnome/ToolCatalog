@@ -15,9 +15,9 @@
 			<div class="panel-body">
  				<%= f.error_notification %>
 				<%= f.input :date, as: :string %>
-				<%=f.input :tool_id, :collection=> Tool.order("lower(name)").uniq, :include_blank=> true, :selected=> (f.object.new_record? ? (defined?(params[:tool]) ? params[:tool] : "") : f.object.tool_id)%>
+				<%=f.input :tool_id, :collection=> Tool.order("lower(name)").uniq, :include_blank=> true, :selected=> (f.object.new_record? ? (defined?(params[:tool]) ? params[:tool] : "") : f.object.tool_id) rescue f.input :tool_id, :collection=> Tool.all, :include_blank=> true, :selected=> (f.object.new_record? ? (defined?(params[:tool]) ? params[:tool] : "") : f.object.tool_id)%>
 				<%=f.input :person_id, collection: Person.order("lower(name)"), :include_blank => true, :selected=> (f.object.new_record? ? (!current_user.nil? ? current_user.id : "") : f.object.person_id)%>
-				<%=f.input :maintenance_type_id, collection: MaintenanceType.order("lower(name)"), input_html: {:include_blank => true}%>
+				<%=f.input :maintenance_type_id, collection: MaintenanceType.order("lower(name)"), input_html: {:include_blank => true} rescue f.input :maintenance_type_id, collection: MaintenanceType.order("lower(name)"), input_html: {:include_blank => true}%>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-8">
 						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
