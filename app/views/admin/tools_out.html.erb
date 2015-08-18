@@ -1,7 +1,7 @@
 <%if current_user.is_admin%>
 	<h2>Tools Checked Out</h2>
 	<ul>
-		<%if @tools_out.size == 0%>
+		<%if @tools_out.nil? || @tools_out.size == 0%>
 			<i>All tools are checked in.</i>
 		<%else%>
 			<table class="table table-hover">
