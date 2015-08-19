@@ -8,6 +8,10 @@
 						<%=link_to "Reserve this Tool", new_tool_reservation_path(:tool=>tool), :class=>"btn btn-primary"%>
 					<%end%>
 				</h2>
+					<%if !current_user.tools.include?(tool)%>
+						<small><i>You don't have permission to use this tool.</i></small>
+					<%end%>
+				
 			</div>
 			<div class="col-md-2 pull-right">
 				<%if current_user.is_admin%>
