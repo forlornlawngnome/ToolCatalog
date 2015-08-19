@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150818214917) do
+ActiveRecord::Schema.define(version: 20150818222525) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -110,6 +110,8 @@ ActiveRecord::Schema.define(version: 20150818214917) do
     t.integer  "day_of_week"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "alternating"
+    t.date     "alt_start"
   end
 
   add_index "hours", ["person_id"], name: "index_hours_on_person_id"

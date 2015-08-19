@@ -18,6 +18,8 @@
 				<%=f.input :time_open, as: :string%>
 				<%=f.input :time_close, as: :string%>
 				<%=f.input :person_id, collection: Person.order("lower(name)"), input_html: {:include_blank => true}%>
+				<%=f.input :alternating%>
+				<%=f.input :alt_start, as: :string%>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-8">
 						<%= f.submit "Submit", :class=>"btn btn-success"%> <%= link_to 'Back', back_link, :class=>"btn btn-danger pull-right" %>
@@ -36,4 +38,6 @@ $('#hour_time_close').datetimepicker({
 	datepicker:false,
 	timeFormat: 'hh:mm TT',
 	timeOnly: true});
+$('#hour_alt_start').datepicker({
+    dateFormat: 'yy-mm-dd'});
 </script>

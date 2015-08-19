@@ -5,6 +5,9 @@
     	<th>Time open</th>
     	<th>Time close</th>
     	<th>Person</th>
+		<th>Alternating?</th>
+		<th>Start Date</th>
+		<th>Is on week?</th>
     	<th colspan="2"></th>
     </tr>
   </thead>
@@ -16,6 +19,9 @@
         <td><%= local_time hour.time_open, "%I:%M:%S %p" %></td>
         <td><%= local_time hour.time_close, "%I:%M:%S %p" %></td>
         <td><%= link_to hour.person.name, hour.person %></td> 
+		<td><%= hour.alternating%></td>
+		<td><%= local_time hour.alt_start, "%B %e, %Y" rescue ""%></td>
+		<td><%= hour.is_currently_on_week?%></td>
         <td><%= link_to fa_icon("pencil"), edit_hour_path(hour) %></td>
         <td><%= link_to fa_icon("trash-o"), hour, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

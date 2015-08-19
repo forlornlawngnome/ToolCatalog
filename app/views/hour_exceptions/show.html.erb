@@ -14,7 +14,6 @@
   <strong>Person:</strong>
   <%= link_to @hour_exception.person.name, @hour_exception.person %>
 </p>
-
 <div class="row">
 	<%if current_user.is_admin%>
 		<%=link_to fa_icon("pencil"), edit_hour_exception_path(@hour_exception), :class=>"btn btn-primary"%>

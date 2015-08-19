@@ -17,6 +17,18 @@
   <%= link_to @hour.person.name, @hour.person %>
 </p>
 
+<p>
+  <strong>Alternating?</strong>
+  <%= @hour.alternating %>
+</p>
+<p>
+  <strong>Date Start:</strong>
+  <%= local_time @hour.alt_start, "%B %e, %Y" rescue ""%>
+</p>
+<p>
+  <strong>Is on week?</strong>
+  <%=@hour.is_currently_on_week?%>
+</p>
 
 
 <div class="row">

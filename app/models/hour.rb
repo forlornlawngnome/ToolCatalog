@@ -3,6 +3,21 @@ class Hour < ActiveRecord::Base
   
   validates :time_open, :time_close, :day_of_week, :presence => true
   
+  def is_currently_on_week?
+    self.is_on_week?(Date.today)
+  end
+  def is_on_week?(date)
+    if self.alternating
+      delta = (date-self.alt_start.beginning_of_week).to_i
+      weeks = delta/7
+      if (delta%2) == 1
+        return true
+      else
+        return false
+      end
+    end
+    return true
+  end
   def self.hours_now?
     exceptions = HourException.now.pluck(:person_id)
     #raise exceptions.inspect
@@ -14,7 +29,7 @@ class Hour < ActiveRecord::Base
    
     
     hours.each do |hour|
-      if hour.time_open.strftime("%H%M%S%N") <= DateTime.now.strftime( "%H%M%S%N" ) && hour.time_close.strftime( "%H%M%S%N" ) >= DateTime.now.strftime( "%H%M%S%N" )
+      if hour.is_currently_on_week? && hour.time_open.strftime("%H%M%S%N") <= DateTime.now.strftime( "%H%M%S%N" ) && hour.time_close.strftime( "%H%M%S%N" ) >= DateTime.now.strftime( "%H%M%S%N" )
         return true
       end
     end
@@ -120,13 +135,13 @@ class Hour < ActiveRecord::Base
   def has_exception
     d = Date.today
    
-    (d.at_beginning_of_week...d.end_of_week).each do |weekday|
+    weeks = Array.new
+    (d.at_beginning_of_week...d.end_of_week+1.day).each do |weekday|
       if weekday.strftime("%A") == Date::DAYNAMES[self.day_of_week]
         exceptions = HourException.where("time_beginning >= ? and time_beginning < ? and person_id = ?",weekday.at_beginning_of_day,weekday.at_end_of_day, self.person.id).order(:time_beginning)
         return exceptions
       end
     end
-    
   end
   private
     def compare_times(t1, t2)

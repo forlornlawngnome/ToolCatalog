@@ -69,6 +69,6 @@ class HoursController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hour_params
-      params.require(:hour).permit(:time_open, :time_close, :person_id, :day_of_week)
+      params.require(:hour).permit(:time_open, :time_close, :person_id, :day_of_week, :alternating, :alt_start)
     end
 end
