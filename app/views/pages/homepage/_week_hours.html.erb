@@ -2,16 +2,23 @@
 <div class="alert <%="#{color}"%>"%>
 	<h5>Upcoming Hours</h5>
 </div>
+
 <dl>
-	<%@hours.each do |day_of_week|%>
-		<dt><%=Date::DAYNAMES[day_of_week[0]]%></dt>
-		<%day_of_week[1].each do |hour|%>
-			<%if hour.is_currently_on_week?%>
-				<%real_hours = hour.actual_hours%>
+	<%(Date.today...Date.today+7.days).each do |date|%>
+		<dt><%=Date::DAYNAMES[date.wday]%> - <small><%=date.strftime("%m/%d/%y")%></small></dt>
+		<%hours = Hour.where(:day_of_week => date.wday)%>
+		<%hours_today = false%>
+		<%hours.each do |hour|%>
+			<%if hour.is_on_week?(date)%>
+				<%real_hours = hour.actual_hours(date)%>
 				<%real_hours[:times].each do |time|%>
+					<%hours_today = true%>
 					<dd><%=hour.person.name%>: <%=local_time time[1][:open], "%I:%M %p" rescue "Unknown"%> - <%=local_time time[1][:close], "%I:%M %p" rescue "Unknown"%></dd>
 				<%end%>
 			<%end%>
+		<%end%>
+		<%if !hours_today%>
+			<i>Lab Closed</i>
 		<%end%>
 	<%end%>
 </dl>

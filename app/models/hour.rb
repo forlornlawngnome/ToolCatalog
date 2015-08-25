@@ -10,7 +10,7 @@ class Hour < ActiveRecord::Base
     if self.alternating
       delta = (date-self.alt_start.beginning_of_week).to_i
       weeks = delta/7
-      if (delta%2) == 1
+      if (weeks%2) == 0
         return true
       else
         return false
@@ -35,8 +35,8 @@ class Hour < ActiveRecord::Base
     end
     return false
   end
-  def actual_hours
-    exceptions = self.has_exception
+  def actual_hours(date)
+    exceptions = self.has_exception(date)
 
     real_hours = {:times =>{0=>{:open =>self.time_open,:close=>self.time_close}}}
     if exceptions.nil? || exceptions.empty?
@@ -132,8 +132,8 @@ class Hour < ActiveRecord::Base
     
     return real_hours
   end
-  def has_exception
-    d = Date.today
+  def has_exception(date)
+    d = date
    
     weeks = Array.new
     (d.at_beginning_of_week...d.end_of_week+1.day).each do |weekday|
