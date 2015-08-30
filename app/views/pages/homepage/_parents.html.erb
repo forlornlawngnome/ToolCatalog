@@ -1,0 +1,11 @@
+<%color = "purple"%>
+<div class="alert <%="#{color}"%>"%>
+	<h5>Parents</h5>
+</div>
+
+<h5>Forms</h5>
+<ul>
+	<%Form.required.each do |form|%>
+		<li><%=link_to form.name, url_for(form.external_link), :target=>"_blank"%></li>
+	<%end%>
+</ul>

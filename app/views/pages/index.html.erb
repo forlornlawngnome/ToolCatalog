@@ -14,79 +14,96 @@
 		We're currently closed. Please check the times below to see when we'll open next.
 	</div>
 <%end%>
-<%if current_user && current_user.is_admin%>
+<%if current_user%>
+	<%if current_user.is_admin%>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="thumbnail positioned rowAdmin">
+					<div class="caption">
+						<%=render "pages/homepage/Admin/tool_maintenance_due"%>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail positioned rowAdmin">
+					<div class="caption">
+						<%=render "pages/homepage/Admin/course_needs_approval"%>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="thumbnail positioned rowAdmin">
+					<div class="caption">
+						<%=render "pages/homepage/Admin/tools_out"%>
+					</div>
+				</div>
+			</div>
+		</div>
+	<%end%>
 	<div class="row">
 		<div class="col-md-4">
-			<div class="thumbnail positioned rowAdmin">
+			<div class="thumbnail positioned row1">
 				<div class="caption">
-					<%=render "pages/homepage/Admin/tool_maintenance_due"%>
+					<%=render "pages/homepage/tool_reservations"%>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-4">
-			<div class="thumbnail positioned rowAdmin">
+			<div class="thumbnail positioned row1">
 				<div class="caption">
-					<%=render "pages/homepage/Admin/course_needs_approval"%>
+					<%=render "pages/homepage/space_reservations"%>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-4">
-			<div class="thumbnail positioned rowAdmin">
+			<div class="thumbnail positioned row1">
 				<div class="caption">
-					<%=render "pages/homepage/Admin/tools_out"%>
+					<%=render "pages/homepage/week_hours"%>
 				</div>
 			</div>
 		</div>
 	</div>
-<%end%>
-<div class="row">
-	<div class="col-md-4">
-		<div class="thumbnail positioned row1">
-			<div class="caption">
-				<%=render "pages/homepage/tool_reservations"%>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="thumbnail positioned row2">
+				<div class="caption">
+					<%=render "pages/homepage/recent_tools"%>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="thumbnail positioned row2">
+				<div class="caption">
+					<%=render "pages/homepage/missing_forms_recertification"%>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="thumbnail positioned row2">
+				<div class="caption">
+					<%=render "pages/homepage/available_courses"%>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="thumbnail positioned row1">
-			<div class="caption">
-				<%=render "pages/homepage/space_reservations"%>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-4">
+	<script>
+		$(".rowAdmin").height(Math.max.apply(null, $(".rowAdmin").map(function() { return ($(this).height()+30); })));
+		$(".row1").height(Math.max.apply(null, $(".row1").map(function() { return ($(this).height()+30); })));
+		$(".row2").height(Math.max.apply(null, $(".row2").map(function() { return ($(this).height()+30); })));
+	</script>
+<%else%>
+	<div class="col-md-6">
 		<div class="thumbnail positioned row1">
 			<div class="caption">
 				<%=render "pages/homepage/week_hours"%>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-md-4">
+	<div class="col-md-6">
 		<div class="thumbnail positioned row2">
 			<div class="caption">
-				<%=render "pages/homepage/recent_tools"%>
+				<%=render "pages/homepage/parents"%>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="thumbnail positioned row2">
-			<div class="caption">
-				<%=render "pages/homepage/missing_forms_recertification"%>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div class="thumbnail positioned row2">
-			<div class="caption">
-				<%=render "pages/homepage/available_courses"%>
-			</div>
-		</div>
-	</div>
-</div>
-<script>
-	$(".rowAdmin").height(Math.max.apply(null, $(".rowAdmin").map(function() { return ($(this).height()+30); })));
-	$(".row1").height(Math.max.apply(null, $(".row1").map(function() { return ($(this).height()+30); })));
-	$(".row2").height(Math.max.apply(null, $(".row2").map(function() { return ($(this).height()+30); })));
-</script>
+<%end%>
