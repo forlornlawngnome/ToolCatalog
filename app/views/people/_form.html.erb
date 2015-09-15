@@ -36,7 +36,7 @@
 									<%=f.input :password_confirmation %>
 									<%=f.input :emergency_contact_name %>
 									<%=f.input :emergency_contact_number %>
-									<%=f.input :barcode %>
+									<%=f.input :barcode, label: "Student ID #" %>
 								<%end%>
 								<%if !current_user.nil? && current_user.is_admin%>
 									<%=f.input :is_admin %>
