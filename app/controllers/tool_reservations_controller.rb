@@ -6,6 +6,12 @@ class ToolReservationsController < ApplicationController
   def index
     @tool_reservations = ToolReservation.all
   end
+  
+  def calendar
+    @tool_reservations = ToolReservation.all
+    @reservations_by_date = @tool_reservations.group_by{|a| a.reservation_beginning.strftime("%Y-%m-%d")}
+    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+  end
 
   # GET /tool_reservations/1
   # GET /tool_reservations/1.json

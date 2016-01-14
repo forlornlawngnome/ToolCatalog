@@ -59,6 +59,8 @@ Rails.application.routes.draw do
   match 'studentlogin' => 'timelogs#student', via: [:get], :as=>:lab_login
   match 'toollogin' => 'tool_logs#checkout', via: [:get], :as=>:tool_login
   
+  match 'tool_calendar' => 'tool_reservations#calendar', via: [:get], :as=>:tool_calendar
+  
   match 'admin_console' => 'admin#admin_console', via: [:get], :as=>:admin
   match 'admin/current_students' => 'admin#students', via:[:get]
   match 'admin/tools_out' => 'admin#tools_out', via:[:get]

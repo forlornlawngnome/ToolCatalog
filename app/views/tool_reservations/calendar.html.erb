@@ -1,0 +1,20 @@
+<div id="reservations">
+	<h2 id="month">
+		<%= link_to "<", date: @date.prev_month %>
+		<%= @date.strftime("%B %Y") %>
+		<%=link_to "Today", {date: Date.today},  :class=>"btn btn-primary"%>
+		<%= link_to ">", date: @date.next_month %>
+	</h2>
+	<%= calendar @date do |date| %>
+    	<%= date.day %>
+		<% if @reservations_by_date[date.to_s] %>
+	    	<ul>
+	      	  	<% @reservations_by_date[date.to_s].each do |res| %>
+					<%res_begin = res.reservation_beginning.strftime("%l:%M %P")%>
+					<%res_end = res.reservation_ending.strftime("%l:%M %P")%>
+	        		<li><%= link_to "#{res.tool.name}: #{res_begin}-#{res_end}", res %></li>
+	      	  	<% end %>
+	    	</ul>
+		<% end %>
+	<% end %>
+</div>
