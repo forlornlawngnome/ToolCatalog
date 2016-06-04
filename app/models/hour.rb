@@ -1,7 +1,7 @@
 class Hour < ActiveRecord::Base
   belongs_to :person
   
-  validates :time_open, :time_close, :day_of_week, :presence => true
+  validates :time_open, :time_close, :day_of_week, :person_id, :presence => true
   
   def is_currently_on_week?
     self.is_on_week?(Date.today)
