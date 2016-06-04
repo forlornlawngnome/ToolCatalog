@@ -14,7 +14,7 @@
 
 <p>
   <strong>Person:</strong>
-  <%= link_to @hour.person.name, @hour.person %>
+  <%= link_to @hour.person.name, @hour.person rescue ""%>
 </p>
 
 <p>
