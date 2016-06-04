@@ -18,7 +18,7 @@
 		<td><%= link_to Date::DAYNAMES[hour.day_of_week], hour %></td>
         <td><%= local_time hour.time_open, "%I:%M:%S %p" %></td>
         <td><%= local_time hour.time_close, "%I:%M:%S %p" %></td>
-        <td><%= link_to hour.person.name, hour.person %></td> 
+        <td><%= link_to hour.person.name, hour.person rescue ""%></td> 
 		<td><%= hour.alternating%></td>
 		<td><%= local_time hour.alt_start, "%B %e, %Y" rescue ""%></td>
 		<td><%= hour.is_currently_on_week?%></td>
