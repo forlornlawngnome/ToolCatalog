@@ -12,10 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.datepicker
-//= require jquery.ui.slider
+//= require jquery-ui/widgets/datepicker
+//= require jquery-ui/widgets/slider
 //= require turbolinks
 //= require_tree .
 //= require twitter/bootstrap
-//= require local_time
+//= require local-time
 //= require cocoon
