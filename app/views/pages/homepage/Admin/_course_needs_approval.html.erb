@@ -1,6 +1,6 @@
 <%color = "red"%>
 <div class="alert <%="#{color}"%>"%>
-	<h5>Courses Needing Approval</h5>
+	<h5>Students Requesting Training</h5>
 </div>
 <dl>
 	<%= form_tag update_many_courses_people_path, :method => :put do %>
@@ -28,6 +28,6 @@
 				</dd>
 			<%end%>
 		<%end%>
-		<p><%= submit_tag "Submit", :class=>"btn #{color} fixed_bottom"%></p>
+		<p><%= submit_tag "Course Complete", :class=>"btn #{color} fixed_bottom"%></p>
 	<%end%>
 </dl>
