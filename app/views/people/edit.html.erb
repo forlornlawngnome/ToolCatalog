@@ -1,3 +1,7 @@
 <h1>Editing Person</h1>
 
-<%= render 'form' %>
+<% if current_user.id == @person.id or current_user.is_admin or current_user.is_student_admin %>
+  <%= render 'form' %>
+<%else%>
+  You don't have permission to view this page.
+<%end%>
