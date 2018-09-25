@@ -1,5 +1,6 @@
 class CoursesPeopleController < ApplicationController
   before_action :set_courses_person, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :authorize_admin, :only => [:new, :create]
 
   # GET /courses_people
   # GET /courses_people.json
