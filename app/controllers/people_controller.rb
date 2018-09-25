@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   skip_before_filter :authorize, :only => [:new, :create]
+  skip_before_filter :authorize_admin, :only => [:new, :create, :edit, :update]
 
   # GET /people
   # GET /people.json
