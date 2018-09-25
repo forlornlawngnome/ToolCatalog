@@ -1,5 +1,6 @@
 class SpaceReservationsController < ApplicationController
   before_action :set_space_reservation, only: [:show, :edit, :update, :destroy]
+   skip_before_filter :authorize_admin, :only => [:new, :create]
 
   # GET /space_reservations
   # GET /space_reservations.json
