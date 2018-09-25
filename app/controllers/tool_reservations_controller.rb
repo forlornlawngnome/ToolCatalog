@@ -1,5 +1,6 @@
 class ToolReservationsController < ApplicationController
   before_action :set_tool_reservation, only: [:show, :edit, :update, :destroy]
+   skip_before_filter :authorize_admin, :only => [:new, :create]
 
   # GET /tool_reservations
   # GET /tool_reservations.json
