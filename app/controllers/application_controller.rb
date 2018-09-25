@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_filter :authorize
-  before_filter :authorize_admin
+  before_filter :authorize_admin, :only=>[:edit, :update, :new, :create]
   after_filter :store_location
   
   def store_location
