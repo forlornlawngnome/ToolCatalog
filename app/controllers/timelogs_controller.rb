@@ -1,5 +1,7 @@
 class TimelogsController < ApplicationController
   before_action :set_timelog, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize_admin, only: [:create, :student]
+  before_filter :authorized_checker, :only=>[:create, :student]
 
   # GET /timelogs
   # GET /timelogs.json
@@ -115,5 +117,12 @@ class TimelogsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def timelog_params
       params.require(:timelog).permit(:person_id, :time_beginning, :time_ending, :duration)
+    end
+    def authorized_checker
+      if current_user.is_admin or current_user.is_student_admin or current_user.email = "fablab@ncssm.edu"
+        
+      else
+        redirect_to home_path, alert: "Not authorized"
+      end
     end
 end

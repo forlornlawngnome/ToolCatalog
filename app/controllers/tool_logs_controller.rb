@@ -1,5 +1,7 @@
 class ToolLogsController < ApplicationController
   before_action :set_tool_log, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize_admin, only: [:create, :checkout]
+  before_filter :authorized_checker, :only=>[:create, :checkout]
 
   # GET /tool_logs
   # GET /tool_logs.json
@@ -117,5 +119,12 @@ class ToolLogsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tool_log_params
       params.require(:tool_log).permit(:tool_id, :person_id, :time_beginning, :time_ending, :duration, :tool_reservation_id)
+    end
+    def authorized_checker
+      if current_user.is_admin or current_user.is_student_admin or current_user.email = "fablab@ncssm.edu"
+        
+      else
+        redirect_to home_path, alert: "Not authorized"
+      end
     end
 end
