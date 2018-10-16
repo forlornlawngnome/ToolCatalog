@@ -18,7 +18,11 @@ class ApplicationController < ActionController::Base
       redirect_to login_url, alert: "Not authorized" if current_user.nil?
     end
     def authorize_admin
-      redirect_to home_path, alert: "Not authorized" if (!current_user.is_admin or !current_user.is_student_admin)
+      if current_user.is_admin or current_user.is_student_admin
+        
+      else
+        redirect_to home_path, alert: "Not authorized"
+      end
     end
     helper_method :current_user 
 end
