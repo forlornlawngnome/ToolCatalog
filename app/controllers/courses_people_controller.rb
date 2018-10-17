@@ -67,7 +67,10 @@ class CoursesPeopleController < ApplicationController
     params[:courses_people].each do |cp|
       if cp[1][:approved] == "1"
         course_person = CoursesPerson.find_by_id(cp[0])
-        if !course_person.update(cp[1])
+        course_person.approved = true
+        course_person.approver = cp[1][:approver]
+        course_person.approval_date = cp[1][:approval_date]
+        if !course_person.save
           @errors.push course_person.errors
         end
       end
@@ -89,6 +92,6 @@ class CoursesPeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def courses_person_params
-      params.require(:courses_person).permit(:course_id, :course, :person, :person_id, :date_requested, :approver, :approved, :approval_date)
+      params.require(:courses_person).permit(:course_id, :course, :person, :person_id, :date_requested, :approver, :approved, :approval_date, :people_ids=>[], people_attributes: [:id, :_destroy])
     end
 end
