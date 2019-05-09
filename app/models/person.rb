@@ -1,6 +1,8 @@
 class Person < ActiveRecord::Base
   has_secure_password
   before_save :lowercaseID
+  before_save :remove_tool_permissions
+  before_save :add_tool_permissions
   
   
   has_and_belongs_to_many :forms
@@ -82,4 +84,49 @@ class Person < ActiveRecord::Base
     save!
     PersonMailer.password_reset(self).deliver
   end
+
+  def add_tool_permissions
+    give_access = true
+    Form.all.each do |form|
+      if form.required
+        if !self.forms.pluck(:form_id).include?(form.id)
+          give_access = false
+        end
+      end
+    end
+    if give_access
+      course = Course.where("lower(name) like ?","%hand tool%").first
+      if !course.nil?
+        if !self.courses.pluck(:course_id).include?(course.id)
+        
+          handtool = self.courses_people.build
+          handtool.course = course
+          handtool.approver = "System"
+          handtool.approved = true
+          handtool.date_requested = DateTime.now
+          handtool.save
+        end
+      end
+    end
+  end
+  def remove_tool_permissions
+    remove_access = false
+    Form.all.each do |form|
+      if form.required
+        if !self.forms.pluck(:form_id).include?(form.id)
+          remove_access = true
+        end
+      end
+    end
+    if remove_access
+      course = Course.where("lower(name) like ?","%hand tool%").first
+      if !course.nil?
+        courses_person = self.courses_people.where(:course_id=>course.id).first
+        if !courses_person.nil?
+          courses_person.destroy
+        end
+      end
+    end
+  end
+  
 end
