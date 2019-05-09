@@ -16,8 +16,8 @@
   <tbody>
     <% @tool_logs.each do |tool_log| %>
       <tr>
-        <td><%= link_to tool_log.tool.name, tool_log.tool %></td>
-        <td><%= link_to tool_log.person.name, tool_log.person %></td>
+        <td><%= link_to tool_log.tool.name, tool_log.tool rescue ""%></td>
+        <td><%= link_to tool_log.person.name, tool_log.person rescue ""%></td>
         <td><%= local_time tool_log.time_beginning %></td>
         <td><%= local_time tool_log.time_ending unless tool_log.time_ending.nil? %></td>
         <td><%= Time.at(tool_log.duration).utc.strftime("%H:%M:%S") rescue "" %></td>

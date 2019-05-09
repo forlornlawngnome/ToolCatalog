@@ -38,7 +38,7 @@
 	<tbody>
 		<%@logs.each do |log|%>
 			<tr>
-				<td><%=link_to log.tool.name, log.tool%></td>
+				<td><%=link_to log.tool.name, log.tool rescue "Tool not found"%></td>
 				<td><%=link_to log.person.name, log.person%></td>
 				<%if log.time_ending.nil?%>
 					<td>Checked Out</td>
