@@ -165,7 +165,7 @@
 				  <tbody>
 				    <% @person.tool_logs.limit(20).order(:time_beginning).each do |toollog| %>
 				      <tr>
-						<td><%= toollog.tool.name %></td>
+						<td><%= toollog.tool.name rescue "Tool name not found"%></td>
 				        <td><%= local_time toollog.time_beginning %></td>
 				        <td><%= local_time toollog.time_ending unless toollog.time_ending.nil?%></td>
 				        <td><%= Time.at(toollog.duration).utc.strftime("%H:%M:%S") rescue ""%></td>
