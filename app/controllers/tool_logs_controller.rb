@@ -102,7 +102,7 @@ class ToolLogsController < ApplicationController
   
   def checkout
     @tool_log = ToolLog.new
-    @logs = ToolLog.today.all
+    @logs = ToolLog.joins(:tool).checked_out.order("tools.name")
     
     respond_to do |format|
       format.html # new.html.erb
