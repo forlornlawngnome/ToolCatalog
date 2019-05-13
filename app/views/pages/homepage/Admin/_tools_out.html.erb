@@ -3,7 +3,7 @@
 	<h5>Tools Checked Out</h5>
 </div>
 <ul>
-	<%tools_out = ToolLog.joins(:tool).checked_out.order("tools.name").limit(5)%>
+	<%tools_out = ToolLog.joins(:tool).checked_out.order("tools.name")%>
 	<%if tools_out.size ==0%>
 		<i>All tools are checked in.</i>
 	<%else%>
