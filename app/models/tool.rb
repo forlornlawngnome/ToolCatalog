@@ -49,11 +49,11 @@ class Tool < ActiveRecord::Base
     end
     return actions
   end
-  def signed_in
-    if self.tool_logs.in_today.nil? || self.tool_logs.in_today.empty?
+  def checked_out
+    if self.tool_logs.checked_out.nil? || self.tool_logs.checked_out.empty?
       return false
     else
-      return self.tool_logs.in_today.first
+      return self.tool_logs.checked_out.first
     end
   end
   

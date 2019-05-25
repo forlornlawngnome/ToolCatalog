@@ -36,8 +36,8 @@ class ToolLogsController < ApplicationController
         redirect_to lab_login_path, alert: "You must turn in your forms before using any tools!"
       elsif tool.nil?
         redirect_to tool_login_path, alert: "No Tool Exists with this ID"
-      elsif tool.signed_in
-        toollog = tool.signed_in
+      elsif tool.checked_out
+        toollog = tool.checked_out
         toollog.time_ending = Time.now
         toollog.updated_at = Time.now
         if toollog.save
