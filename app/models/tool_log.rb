@@ -16,7 +16,7 @@ class ToolLog < ActiveRecord::Base
   scope :today, -> {where("time_beginning >= ? ",ApplicationHelper.today.utc).order("updated_at DESC")}
   
   def is_late?
-    if !self.tool.nil?
+    if !self.tool.nil? and !self.tool.max_reservation_time.nil?
       limit = self.tool.max_reservation_time*60*60 #Translate reservation from hours to seconds
       duration = (Time.now - self.time_beginning) #Get number of seconds since the tool was checked out
       if duration <= limit
