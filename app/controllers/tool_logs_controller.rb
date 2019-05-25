@@ -33,7 +33,7 @@ class ToolLogsController < ApplicationController
       if student.nil?
         redirect_to tool_login_path, alert: "No Student Exists with this ID"
       elsif !student.has_required_forms
-        redirect_to lab_login_path, alert: "You must turn in your forms before using any tools!"
+        redirect_to tool_login_path, alert: "You must turn in your forms before using any tools!"
       elsif tool.nil?
         redirect_to tool_login_path, alert: "No Tool Exists with this ID"
       elsif tool.checked_out
@@ -61,15 +61,15 @@ class ToolLogsController < ApplicationController
         
       end
     elsif params[:single]
-      @timelog = Timelog.new(timelog_params)
+      @toollog = Toollog.new(toollog_params)
     
       respond_to do |format|
-        if @timelog.save
-          format.html { redirect_to @timelog, notice: 'Timelog was successfully created.' }
-          format.json { render json: @timelog, status: :created, location: @timelog }
+        if @toollog.save
+          format.html { redirect_to @toollog, notice: 'Timelog was successfully created.' }
+          format.json { render json: @toollog, status: :created, location: @toollog }
         else
           format.html { render action: "new" }
-          format.json { render json: @timelog.errors, status: :unprocessable_entity }
+          format.json { render json: @toollog.errors, status: :unprocessable_entity }
         end
       end
     end
