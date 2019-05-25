@@ -33,6 +33,7 @@
 			<th>Person</th>
 			<th>In/Out</th>
 			<th>Time</th>
+			<th>Late?</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -46,6 +47,11 @@
 				<%else%>
 					<td>Checked In</td>
 					<td><%=local_time log.time_ending, "%I:%M:%S %p"%></td>
+				<%end%>
+				<%if log.is_late?%>
+					<td class="danger">Tool is Late</td>
+				<%else%>
+					<td></td>
 				<%end%>
 			</tr>
 		<%end%>
