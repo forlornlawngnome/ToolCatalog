@@ -128,5 +128,13 @@ class Person < ActiveRecord::Base
       end
     end
   end
-  
+  def tools_late
+    self.tool_logs.checked_out.each do |tool_log|
+      if tool_log.is_late?
+        return true
+      else
+        return false
+      end
+    end
+  end
 end
