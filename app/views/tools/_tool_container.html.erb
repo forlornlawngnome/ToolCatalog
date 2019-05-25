@@ -14,7 +14,7 @@
 				
 			</div>
 			<div class="col-md-2 pull-right">
-				<%if current_user.is_admin%>
+				<%if current_user.is_admin or current_user.is_student_admin%>
 					<%=link_to fa_icon("pencil"), edit_tool_path(tool), :class=>"pull-right"%>
 				<%end%>
 			</div>
