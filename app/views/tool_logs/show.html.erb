@@ -17,7 +17,7 @@
 
 <p>
   <strong>Time out:</strong>
-  <%= local_time @tool_log.time_ending %>
+  <%= local_time @tool_log.time_ending rescue ""%>
 </p>
 
 <p>
