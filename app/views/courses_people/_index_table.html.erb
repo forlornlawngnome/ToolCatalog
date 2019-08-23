@@ -14,8 +14,8 @@
   <tbody>
     <% courses_people.each do |courses_person| %>
       <tr>
-        <td><%= link_to courses_person.course.name, courses_person.course %></td>
-        <td><%= link_to courses_person.person.name, courses_person.person %></td>
+        <td><%= link_to courses_person.course.name, courses_person.course rescue ""%></td>
+        <td><%= link_to courses_person.person.name, courses_person.person rescue ""%></td>
         <td><%= local_time courses_person.date_requested, "%B %d, %Y" rescue ""%></td>
         <td><%= courses_person.approver %></td>
         <td><%= courses_person.approved %></td>
