@@ -11,8 +11,8 @@
   <tbody>
     <% maintenance_types.each do |maintenance_type| %>
       <tr>
-        <td><%= link_to maintenance_type.name, maintenance_type %></td>
-        <td><%= link_to maintenance_type.category.name, maintenance_type.category %></td>
+        <td><%= link_to maintenance_type.name, maintenance_type rescue ""%></td>
+        <td><%= link_to maintenance_type.category.name, maintenance_type.category rescue ""%></td>
         <td><%= maintenance_type.required_days_between_maintenance %></td>
         <td><%= link_to fa_icon("pencil"), edit_maintenance_type_path(maintenance_type) %></td>
         <td><%= link_to fa_icon("trash-o"), maintenance_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>

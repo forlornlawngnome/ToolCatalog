@@ -14,8 +14,8 @@
   <tbody>
     <% @maintenance_actions.each do |maintenance_action| %>
       <tr>
-        <td><%= link_to maintenance_action.date, maintenance_action %></td>
-        <td><%= link_to maintenance_action.tool.name, maintenance_action.tool %></td>
+        <td><%= link_to maintenance_action.date, maintenance_action rescue ""%></td>
+        <td><%= link_to maintenance_action.tool.name, maintenance_action.tool rescue ""%></td>
         <td><%= link_to maintenance_action.person.name, maintenance_action.person %></td>
         <td><%= link_to maintenance_action.maintenance_type.name, maintenance_action.maintenance_type %></td>
         <td><%= link_to fa_icon("pencil"), edit_maintenance_action_path(maintenance_action) %></td>
