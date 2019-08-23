@@ -7,7 +7,7 @@ class AdminController < ApplicationController
     @categories = Category.order(:name)
   end
   def tools_out
-    @tools_out = ToolLogs.checked_out
+    @tools_out = ToolLog.checked_out
   end
 
   def course_approval
