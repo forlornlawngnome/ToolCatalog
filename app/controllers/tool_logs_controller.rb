@@ -32,8 +32,6 @@ class ToolLogsController < ApplicationController
       
       if student.nil?
         redirect_to tool_login_path, alert: "No Student Exists with this ID"
-      elsif student.tools_late
-        redirect_to tool_login_path, alert: "You have an overdue tool. Please return before checking out more"
       elsif tool.nil?
         redirect_to tool_login_path, alert: "No Tool Exists with this ID"
       elsif tool.checked_out
@@ -46,17 +44,21 @@ class ToolLogsController < ApplicationController
           redirect_to tool_login_path, alert: "Failed to Checked In: #{tool.name}" 
         end
       else
-        toollog = ToolLog.new
-        toollog.person = student
-        toollog.tool = tool
-        toollog.time_beginning = Time.now
-        toollog.updated_at = Time.now
-        
-        
-        if toollog.save
-          redirect_to tool_login_path, notice: "Checked Out: #{tool.name}" 
+        if student.tools_late
+          redirect_to tool_login_path, alert: "You have an overdue tool. Please return before checking out more"
         else
-          redirect_to tool_login_path, alert: "Failed to Check Out: #{tool.name} #{toollog.errors.full_messages}" 
+          toollog = ToolLog.new
+          toollog.person = student
+          toollog.tool = tool
+          toollog.time_beginning = Time.now
+          toollog.updated_at = Time.now
+          
+          
+          if toollog.save
+            redirect_to tool_login_path, notice: "Checked Out: #{tool.name}" 
+          else
+            redirect_to tool_login_path, alert: "Failed to Check Out: #{tool.name} #{toollog.errors.full_messages}" 
+          end
         end
         
       end
