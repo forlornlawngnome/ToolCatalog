@@ -7,8 +7,9 @@ class AdminController < ApplicationController
     @categories = Category.order(:name)
   end
   def tools_out
-    
+    @tools_out = Tools.checked_out
   end
+
   def course_approval
     @courses_people = CoursesPerson.not_approved.includes(:course).order("courses.name")
   end
