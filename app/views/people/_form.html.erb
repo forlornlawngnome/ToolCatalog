@@ -46,9 +46,6 @@
 								<%end%>
 							</div>
 							<%if !current_user.nil? && current_user.is_admin%>
-								<div role="tabpanel" class="tab-pane" id="forms">
-									<%= f.association :forms,   as: :check_boxes %>
-								</div>
 								<div role="tabpanel" class="tab-pane" id="courses">
 									<%= f.association :courses,   as: :check_boxes %>
 								</div>
