@@ -1,8 +1,8 @@
 class Person < ActiveRecord::Base
   has_secure_password
   before_save :lowercaseID
-  before_save :remove_tool_permissions
-  before_save :add_tool_permissions
+  after_save :remove_tool_permissions
+  after_save :add_tool_permissions
   
   
   has_many :hours
