@@ -87,11 +87,11 @@ class Tool < ActiveRecord::Base
     
     if search && !search.empty?
       if Rails.env == "development"
-        ids = ids + Tool.where("tools.name like ? or tools.description like ? or tools.image like ? or tools.capability like ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").pluck(:id)
+        ids = ids + Tool.where("tools.name like ? or tools.description like ? or tools.image like ? or tools.capability like ? or tools.barcode like ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").pluck(:id)
         ids = ids +  Tool.joins(:categories).where("categories.name like ?", "%#{search}%").pluck(:id)
         ids = ids +  Tool.joins(:courses).where("courses.name like ? or courses.additional_info like ?", "%#{search}%", "%#{search}%").pluck(:id)
       else
-        ids = ids + Tool.where("tools.name ILIKE ? or tools.description ILIKE ? or tools.image ILIKE ? or tools.capability ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%").pluck(:id)
+        ids = ids + Tool.where("tools.name ILIKE ? or tools.description ILIKE ? or tools.image ILIKE ? or tools.capability ILIKE ? or tools.barcode ILIKE ?", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}").pluck(:id)
         ids = ids +  Tool.joins(:categories).where("categories.name ILIKE ?", "%#{search}%").pluck(:id)
         ids = ids +  Tool.joins(:courses).where("courses.name ILIKE ? or courses.additional_info ILIKE ?", "%#{search}%", "%#{search}%").pluck(:id)
       end
