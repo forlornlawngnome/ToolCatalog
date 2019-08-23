@@ -12,7 +12,7 @@
   <tbody>
     <% tool_reservations.each do |tool_reservation| %>
       <tr>
-        <td><%= link_to tool_reservation.person.name, tool_reservation.person %></td>
+        <td><%= link_to tool_reservation.person.name, tool_reservation.person rescue ""%></td>
         <td><%= link_to tool_reservation.tool.name, tool_reservation.tool %></td>
         <td><%= local_time tool_reservation.reservation_beginning, "%a %B %d - %I:%M %p"%></td>
         <td><%= local_time tool_reservation.reservation_ending, "%a %B %d - %I:%M:%S %p" %></td>
