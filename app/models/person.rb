@@ -102,5 +102,6 @@ class Person < ActiveRecord::Base
         return false
       end
     end
+    return false
   end
 end
