@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
   # GET /courses/new
   def new
     @course = Course.new
-    #@course.documentation_links.build
+    @course.documentation_links.build
   end
 
   # GET /courses/1/edit
