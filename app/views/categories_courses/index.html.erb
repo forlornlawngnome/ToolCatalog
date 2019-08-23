@@ -12,8 +12,8 @@
   <tbody>
     <% @categories_courses.each do |categories_course| %>
       <tr>
-        <td><%= link_to categories_course.category.name, categories_course.category %></td>
-        <td><%= link_to categories_course.course.name, categories_course.course %></td>
+        <td><%= link_to categories_course.category.name, categories_course.category rescue ""%></td>
+        <td><%= link_to categories_course.course.name, categories_course.course rescue ""%></td>
         <td><%= link_to 'Show', categories_course %></td>
         <td><%= link_to fa_icon("pencil"), edit_categories_course_path(categories_course) %></td>
         <td><%= link_to fa_icon("trash-o"), categories_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
