@@ -5,7 +5,6 @@ class Person < ActiveRecord::Base
   before_save :add_tool_permissions
   
   
-  has_and_belongs_to_many :forms
   has_many :hours
   has_many :hour_exceptions
   has_many :tool_reservations
@@ -53,26 +52,6 @@ class Person < ActiveRecord::Base
       return Course.all
     end
   end
-  def missing_forms
-    if self.forms.empty?
-      return Form.order("name")
-    else
-      return Form.where("id not in (?)", self.forms.pluck(:id))
-    end
-  end
-  def has_required_forms
-    forms = Form.required
-    if forms.empty?
-      return true
-    else
-      forms.each do |form|
-        if !self.forms.include?(form)
-          return false
-        end
-      end
-    end
-    return true
-  end
   def generate_token(column)
       begin
         self[column] = SecureRandom.urlsafe_base64
@@ -87,13 +66,7 @@ class Person < ActiveRecord::Base
 
   def add_tool_permissions
     give_access = true
-    Form.all.each do |form|
-      if form.required
-        if !self.forms.pluck(:form_id).include?(form.id)
-          give_access = false
-        end
-      end
-    end
+    
     if give_access
       course = Course.where("lower(name) like ?","%hand tool%").first
       if !course.nil?
@@ -111,13 +84,6 @@ class Person < ActiveRecord::Base
   end
   def remove_tool_permissions
     remove_access = false
-    Form.all.each do |form|
-      if form.required
-        if !self.forms.pluck(:form_id).include?(form.id)
-          remove_access = true
-        end
-      end
-    end
     if remove_access
       course = Course.where("lower(name) like ?","%hand tool%").first
       if !course.nil?

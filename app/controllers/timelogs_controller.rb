@@ -30,8 +30,6 @@ class TimelogsController < ApplicationController
       student = Person.find_by_barcode(params[:person_id].downcase)
       if student.nil?
         redirect_to lab_login_path, alert: "No Student Exists with this ID"
-      elsif !student.has_required_forms
-        redirect_to lab_login_path, alert: "You must turn in your forms before using the lab"
       elsif student.signed_in
         timelog = student.signed_in
         timelog.time_ending = Time.now

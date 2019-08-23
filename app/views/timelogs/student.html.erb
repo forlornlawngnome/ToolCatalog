@@ -27,7 +27,6 @@
 			<th>Name</th>
 			<th>In/Out</th>
 			<th>Time</th>
-			<th>Waiver?</th>
 			<th>Trained On</th>
 		</tr>
 	</thead>
@@ -42,7 +41,6 @@
 					<td>Out</td>
 					<td><%=local_time log.time_ending, "%I:%M:%S %p"%></td>
 				<%end%>
-				<td><%=log.person.has_required_forms%></td>
 				<td>
 					<%log.person.courses.each do |course|%>
 						<%=course.name%>,

@@ -9,10 +9,6 @@ class AdminController < ApplicationController
   def tools_out
     
   end
-  def forms
-    @forms = Form.order("name")
-    @users = Person.active.order("name")
-  end
   def course_approval
     @courses_people = CoursesPerson.not_approved.includes(:course).order("courses.name")
   end

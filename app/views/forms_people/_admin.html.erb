@@ -1,9 +1,0 @@
-<div class="col-md-12">
-	<h3>Forms Outstanding</h3>
-	<hr />
-	<%=link_to "All Forms Turned In", forms_people_path%> | 
-	<%= link_to 'New Form Turned In', new_forms_person_path %>
-	<br />
-	<br />
-	<%=render "/forms_people/index_table", :forms_people => FormsPerson.all%>
-</div>

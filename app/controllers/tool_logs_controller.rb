@@ -32,8 +32,6 @@ class ToolLogsController < ApplicationController
       
       if student.nil?
         redirect_to tool_login_path, alert: "No Student Exists with this ID"
-      elsif !student.has_required_forms
-        redirect_to tool_login_path, alert: "You must turn in your forms before using any tools!"
       elsif student.tools_late
         redirect_to tool_login_path, alert: "You have an overdue tool. Please return before checking out more"
       elsif tool.nil?
