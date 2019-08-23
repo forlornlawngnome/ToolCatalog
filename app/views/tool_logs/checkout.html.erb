@@ -12,15 +12,16 @@
     </div>
   <% end %>
   
-  <div class="field">
-    <%="User Number" %><br />
-    <%= text_field_tag :person_id%>
-	<%= javascript_tag "$('#person_id').focus()" %>
-  </div>
+  
   <div class="field">
     <%="Tool Number" %><br />
     <%= text_field_tag :tool_id%>
 	<%= javascript_tag "$('#tool_id').focus()" %>
+  </div>
+  <div class="field">
+    <%="User Number" %><br />
+    <%= text_field_tag :person_id%>
+	<%= javascript_tag "$('#person_id').focus()" %>
   </div>
   <div class="actions">
     <%= f.submit "Submit", :name => 'multi' %>
