@@ -15,7 +15,7 @@
 							<li>
 				    			<%= fields_for "courses_people[]", record do |f| %>
 									<%=f.check_box :approved%>
-									<%=link_to record.person.name, record%>
+									<%=link_to record.person.name, record rescue ""%>
 			   						<%=f.hidden_field :approver, :value =>current_user.email%>
 			   						<%=f.hidden_field :approval_date, :value =>DateTime.now%>
 				    			<% end %>
