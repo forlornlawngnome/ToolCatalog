@@ -12,7 +12,7 @@ class Person < ActiveRecord::Base
   has_many :courses, :through=>:courses_people
   has_many :categories, :through=>:courses
   has_many :tools, :through => :categories
-  has_many :courses_people, dependent: :destroy, -> { where(:approved=> true) }
+  has_many :courses_people, -> { where(:approved=> true) }, dependent: :destroy
   has_many :timelogs, dependent: :destroy
   has_many :tool_logs, dependent: :destroy
   has_many :checked_out_tools, :through=>:tool_logs, :source => :tool, dependent: :destroy
