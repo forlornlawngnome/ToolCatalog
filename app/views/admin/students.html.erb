@@ -39,6 +39,7 @@
 	<br>
 
 	<%= link_to "#{fa_icon("plus")} New Person".html_safe, new_person_path, :class=>"btn btn-primary" %>
+	<%= link_to "Reset Barcodes", reset_userkeys_people_path, :class=>"btn btn-danger pull-right", data: { confirm: 'Are you sure? This is not reversible.' } %>
 <%else%>
 	<%=render "/layouts/no_approval"%>
 <%end%>

@@ -61,6 +61,30 @@ class PeopleController < ApplicationController
       end
     end
   end
+  def reset_userkeys
+
+    not_admins = Person.where.not(is_admin: true).or(Person.where(is_admin: nil))
+    year = 0
+    if Date.current.month > 5
+      year = Date.current.year + 1
+    else
+      year = Date.current.year
+    end
+
+    people = not_admins.where("graduation_year <= ?",year)
+    people = people.where("updated_at < ?", Date.current - 1.month)
+    people.each do |person|
+      if person.barcode != person.email
+        person.barcode = person.email
+        person.save
+      end
+      if !person.archived and person.graduation_year < year
+        person.archived = true
+        person.save
+      end
+    end
+    redirect_to admin_current_students_path
+  end
 
   # DELETE /people/1
   # DELETE /people/1.json

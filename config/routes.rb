@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :timelogs
 
   resources :courses_people do
-    collection do 
+    collection do
       put :update_many
     end
   end
@@ -40,25 +40,29 @@ Rails.application.routes.draw do
       post :import
     end
   end
-  resources :tool_import, :only => [:new, :create] 
-  
+  resources :tool_import, :only => [:new, :create]
 
 
-  resources :people
-  
+
+  resources :people do
+    collection do
+      get :reset_userkeys
+    end
+  end
+
   resources :sessions
 
   resources :password_resets
-  
+
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   get "signup" => "users#new", :as => "signup"
 
   match 'studentlogin' => 'timelogs#student', via: [:get], :as=>:lab_login
   match 'toollogin' => 'tool_logs#checkout', via: [:get], :as=>:tool_login
-  
+
   match 'tool_calendar' => 'tool_reservations#calendar', via: [:get], :as=>:tool_calendar
-  
+
   match 'admin_console' => 'admin#admin_console', via: [:get], :as=>:admin
   match 'admin/current_students' => 'admin#students', via:[:get]
   match 'admin/tools_out' => 'admin#tools_out', via:[:get]
