@@ -1,7 +1,7 @@
 class ToolLogsController < ApplicationController
   before_action :set_tool_log, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize_admin, only: [:create, :checkout]
-  before_filter :authorized_checker, :only=>[:create, :checkout]
+  before_action :authorized_checker, :only=>[:create, :checkout]
 
   # GET /tool_logs
   # GET /tool_logs.json
@@ -29,7 +29,7 @@ class ToolLogsController < ApplicationController
     if params[:multi]
       student = Person.find_by_barcode(params[:person_id].downcase)
       tool = Tool.find_by_barcode(params[:tool_id].downcase)
-      
+
       if student.nil?
         redirect_to tool_login_path, alert: "No Student Exists with this ID"
       elsif tool.nil?
@@ -39,9 +39,9 @@ class ToolLogsController < ApplicationController
         toollog.time_ending = Time.now
         toollog.updated_at = Time.now
         if toollog.save
-          redirect_to tool_login_path, notice: "Checked In: #{tool.name}" 
+          redirect_to tool_login_path, notice: "Checked In: #{tool.name}"
         else
-          redirect_to tool_login_path, alert: "Failed to Checked In: #{tool.name}" 
+          redirect_to tool_login_path, alert: "Failed to Checked In: #{tool.name}"
         end
       else
         if student.tools_late
@@ -52,19 +52,19 @@ class ToolLogsController < ApplicationController
           toollog.tool = tool
           toollog.time_beginning = Time.now
           toollog.updated_at = Time.now
-          
-          
+
+
           if toollog.save
-            redirect_to tool_login_path, notice: "Checked Out: #{tool.name}" 
+            redirect_to tool_login_path, notice: "Checked Out: #{tool.name}"
           else
-            redirect_to tool_login_path, alert: "Failed to Check Out: #{tool.name} #{toollog.errors.full_messages}" 
+            redirect_to tool_login_path, alert: "Failed to Check Out: #{tool.name} #{toollog.errors.full_messages}"
           end
         end
-        
+
       end
     elsif params[:single]
       @toollog = Toollog.new(toollog_params)
-    
+
       respond_to do |format|
         if @toollog.save
           format.html { redirect_to @toollog, notice: 'Timelog was successfully created.' }
@@ -76,7 +76,7 @@ class ToolLogsController < ApplicationController
       end
     end
   end
-  
+
 
   # PATCH/PUT /tool_logs/1
   # PATCH/PUT /tool_logs/1.json
@@ -101,11 +101,11 @@ class ToolLogsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def checkout
     @tool_log = ToolLog.new
     @logs = ToolLog.joins(:tool).checked_out.order("tools.name")
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @timelog }
@@ -124,7 +124,7 @@ class ToolLogsController < ApplicationController
     end
     def authorized_checker
       if current_user.is_admin or current_user.is_student_admin or current_user.email = "fablab@ncssm.edu"
-        
+
       else
         redirect_to home_path, alert: "Not authorized"
       end

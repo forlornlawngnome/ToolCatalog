@@ -1,6 +1,6 @@
 class CoursesPeopleController < ApplicationController
   before_action :set_courses_person, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authorize_admin, :only => [:new, :create]
+  skip_before_action :authorize_admin, :only => [:new, :create]
 
   # GET /courses_people
   # GET /courses_people.json
@@ -63,7 +63,7 @@ class CoursesPeopleController < ApplicationController
 
   def update_many
     @errors = Array.new
-    
+
     params[:courses_people].each do |cp|
       if cp[1][:approved] == "1"
         course_person = CoursesPerson.find_by_id(cp[0])

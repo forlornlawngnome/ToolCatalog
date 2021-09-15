@@ -60,12 +60,12 @@ class ToolsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def search
     search_term = params[:search]
     @tools = Tool.search(search_term).uniq.order(:name)
   end
-  
+
   def catalog
     @categories = Category.order(:name)
     @tools = Tool.order(:name)

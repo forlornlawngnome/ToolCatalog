@@ -1,7 +1,7 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authorize, :only => [:new, :create]
-  skip_before_filter :authorize_admin, :only => [:new, :create, :edit, :update]
+  skip_before_action :authorize, :only => [:new, :create]
+  skip_before_action :authorize_admin, :only => [:new, :create, :edit, :update]
 
   # GET /people
   # GET /people.json
@@ -37,7 +37,7 @@ class PeopleController < ApplicationController
     respond_to do |format|
       if @person.save
         if !current_user
-          session[:person_id] = @person.id  
+          session[:person_id] = @person.id
         end
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }

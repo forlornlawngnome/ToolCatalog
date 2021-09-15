@@ -1,7 +1,7 @@
 class TimelogsController < ApplicationController
   before_action :set_timelog, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize_admin, only: [:create, :student]
-  before_filter :authorized_checker, :only=>[:create, :student]
+  before_action :authorized_checker, :only=>[:create, :student]
 
   # GET /timelogs
   # GET /timelogs.json
@@ -35,31 +35,31 @@ class TimelogsController < ApplicationController
         timelog.time_ending = Time.now
         timelog.updated_at = Time.now
         if timelog.save
-          redirect_to lab_login_path, notice: "Signed Out: #{student.name}" 
+          redirect_to lab_login_path, notice: "Signed Out: #{student.name}"
         else
-          redirect_to lab_login_path, alert: "Failed to Sign Out: #{student.name}" 
+          redirect_to lab_login_path, alert: "Failed to Sign Out: #{student.name}"
         end
       else
         timelog = Timelog.new
         timelog.person = student
         timelog.time_beginning = Time.now
         timelog.updated_at = Time.now
-        
+
         student.archived=false
         if !student.save
-          redirect_to lab_login_path, alert: "Failed to Sign In: #{student.name}" 
+          redirect_to lab_login_path, alert: "Failed to Sign In: #{student.name}"
         end
-        
+
         if timelog.save
-          redirect_to lab_login_path, notice: "Signed In: #{student.name}" 
+          redirect_to lab_login_path, notice: "Signed In: #{student.name}"
         else
-          redirect_to lab_login_path, alert: "Failed to Sign In: #{student.name}" 
+          redirect_to lab_login_path, alert: "Failed to Sign In: #{student.name}"
         end
-        
+
       end
     elsif params[:single]
       @timelog = Timelog.new(timelog_params)
-    
+
       respond_to do |format|
         if @timelog.save
           format.html { redirect_to @timelog, notice: 'Timelog was successfully created.' }
@@ -95,11 +95,11 @@ class TimelogsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def student
     @timelog = Timelog.new
     @logs = Timelog.today.all
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @timelog }
@@ -118,7 +118,7 @@ class TimelogsController < ApplicationController
     end
     def authorized_checker
       if current_user.is_admin or current_user.is_student_admin or current_user.email = "fablab@ncssm.edu"
-        
+
       else
         redirect_to home_path, alert: "Not authorized"
       end

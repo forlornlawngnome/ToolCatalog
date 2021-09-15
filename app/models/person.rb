@@ -3,25 +3,26 @@ class Person < ActiveRecord::Base
   before_save :lowercaseID
   after_save :remove_tool_permissions
   after_save :add_tool_permissions
-  
-  
+
+
   has_many :hours
   has_many :hour_exceptions
   has_many :tool_reservations
   has_many :space_reservations
+  has_many :courses_people, -> { where(:approved=> true) }, dependent: :destroy
   has_many :courses, :through=>:courses_people
   has_many :categories, :through=>:courses
   has_many :tools, :through => :categories
-  has_many :courses_people, -> { where(:approved=> true) }, dependent: :destroy
+
   has_many :timelogs, dependent: :destroy
   has_many :tool_logs, dependent: :destroy
   has_many :checked_out_tools, :through=>:tool_logs, :source => :tool, dependent: :destroy
- 
+
   validates :name, :email, :graduation_year, :barcode, :presence => true
-  validates :password, :presence => true, :on => :create  
+  validates :password, :presence => true, :on => :create
   validates :email, :uniqueness => true
   validates :barcode, :uniqueness => true
-  
+
   def lowercaseID
     self.barcode = self.barcode.downcase
   end
@@ -66,12 +67,12 @@ class Person < ActiveRecord::Base
 
   def add_tool_permissions
     give_access = true
-    
+
     if give_access
       course = Course.where("lower(name) like ?","%hand tool%").first
       if !course.nil?
         if !self.courses.pluck(:course_id).include?(course.id)
-        
+
           handtool = self.courses_people.build
           handtool.course = course
           handtool.approver = "System"

@@ -1,13 +1,13 @@
 class ToolReservationsController < ApplicationController
   before_action :set_tool_reservation, only: [:show, :edit, :update, :destroy]
-   skip_before_filter :authorize_admin, :only => [:new, :create]
+  skip_before_action :authorize_admin, :only => [:new, :create]
 
   # GET /tool_reservations
   # GET /tool_reservations.json
   def index
     @tool_reservations = ToolReservation.all
   end
-  
+
   def calendar
     @tool_reservations = ToolReservation.all
     @reservations_by_date = @tool_reservations.group_by{|a| a.reservation_beginning.strftime("%Y-%m-%d")}

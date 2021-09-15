@@ -42,9 +42,7 @@ Rails.application.routes.draw do
   end
   resources :tool_import, :only => [:new, :create] 
   
-  resources :forms_people
 
-  resources :forms
 
   resources :people
   
@@ -64,7 +62,6 @@ Rails.application.routes.draw do
   match 'admin_console' => 'admin#admin_console', via: [:get], :as=>:admin
   match 'admin/current_students' => 'admin#students', via:[:get]
   match 'admin/tools_out' => 'admin#tools_out', via:[:get]
-  match 'admin/forms' => 'admin#forms', via:[:get]
   match 'admin/course_approval' => 'admin#course_approval', via:[:get]
   get 'admin/tool_import'=> redirect('/tool_import/new')
   # The priority is based upon order of creation: first created -> highest priority.
