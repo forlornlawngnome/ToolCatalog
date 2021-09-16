@@ -63,7 +63,7 @@ class PeopleController < ApplicationController
   end
   def reset_userkeys
 
-    not_admins = Person.where.not(is_admin: true).or(Person.where(is_admin: nil))
+    not_admins = Person.where.not(is_admin: true)#.or(Person.where(is_admin: nil))
     year = 0
     if Date.current.month > 5
       year = Date.current.year + 1
