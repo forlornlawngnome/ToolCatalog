@@ -14,7 +14,7 @@
   <tbody>
     <% @timelogs.each do |timelog| %>
       <tr>
-        <td><%= link_to timelog.person.name, timelog.person rescue timelog.person.id %></td>
+        <td><%= link_to timelog.person.name, timelog.person rescue timelog.id %></td>
         <td><%= local_time timelog.time_beginning %></td>
         <td><%= local_time timelog.time_ending unless timelog.time_ending.nil?%></td>
         <td><%= Time.at(timelog.duration).utc.strftime("%H:%M:%S") rescue ""%></td>
